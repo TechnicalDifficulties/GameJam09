@@ -31,15 +31,26 @@ public class PlayerControl : MonoBehaviour
 		anim = GetComponent<Animator>();
 	}
 
+	void Start()
+	{
+		GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1 * moveForce);
+	}
+
 
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
+		//grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
-		if(Input.GetButtonDown("Jump") && grounded)
-			jump = true;
+//		if(Input.GetButtonDown("Jump") && grounded)
+//			jump = true;
+
+		if (Input.GetKeyDown (KeyCode.K)){
+			// ... flip the player.
+			Flip();
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x * -1 , GetComponent<Rigidbody2D>().velocity.y);
+		}
 	}
 
 
@@ -47,45 +58,68 @@ public class PlayerControl : MonoBehaviour
 	{
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis ("Vertical");
 
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-		if(h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
+		if (h * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
 			// ... add a force to the player.
-			GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce);
+		if (facingRight && h > 0) {
+			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
+			GetComponent<Rigidbody2D> ().drag = 0;
+		} else if (!facingRight && h < 0) {
+			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
+			GetComponent<Rigidbody2D> ().drag = 0;
+		}
+		else if(h != 0)
+			GetComponent<Rigidbody2D> ().drag = 5 * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x * .1f);
+		else {
+			GetComponent<Rigidbody2D> ().drag = 0;
+		}
+			
+					
 
 		// If the player's horizontal velocity is greater than the maxSpeed...
 		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
 			// ... set the player's velocity to the maxSpeed in the x axis.
 			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
+		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
+		if(v * GetComponent<Rigidbody2D>().velocity.y < maxSpeed)
+			// ... add a force to the player.
+			GetComponent<Rigidbody2D>().AddForce(Vector2.up * v * moveForce);
+		
+		// If the player's horizontal velocity is greater than the maxSpeed...
+		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > maxSpeed)
+			// ... set the player's velocity to the maxSpeed in the x axis.
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x , Mathf.Sign(GetComponent<Rigidbody2D>().velocity.y) * maxSpeed);
+
 		// If the input is moving the player right and the player is facing left...
-		if(h > 0 && !facingRight)
-			// ... flip the player.
-			Flip();
-		// Otherwise if the input is moving the player left and the player is facing right...
-		else if(h < 0 && facingRight)
-			// ... flip the player.
-			Flip();
+		//if(h > 0 && !facingRight)
 
-		// If the player should jump...
-		if(jump)
-		{
-			// Set the Jump animator trigger parameter.
-			anim.SetTrigger("Jump");
+//		// Otherwise if the input is moving the player left and the player is facing right...
+//		else if(h < 0 && facingRight)
+//			// ... flip the player.
+//			Flip();
 
-			// Play a random jump audio clip.
-			int i = Random.Range(0, jumpClips.Length);
-			AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
-
-			// Add a vertical force to the player.
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-
-			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-			jump = false;
-		}
+//		// If the player should jump...
+//		if(jump)
+//		{
+//			// Set the Jump animator trigger parameter.
+//			anim.SetTrigger("Jump");
+//
+//			// Play a random jump audio clip.
+//			int i = Random.Range(0, jumpClips.Length);
+//			AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
+//
+//			// Add a vertical force to the player.
+//			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+//
+//			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
+//			jump = false;
+//		}
 	}
 	
 	
@@ -101,40 +135,40 @@ public class PlayerControl : MonoBehaviour
 	}
 
 
-	public IEnumerator Taunt()
-	{
-		// Check the random chance of taunting.
-		float tauntChance = Random.Range(0f, 100f);
-		if(tauntChance > tauntProbability)
-		{
-			// Wait for tauntDelay number of seconds.
-			yield return new WaitForSeconds(tauntDelay);
+//	public IEnumerator Taunt()
+//	{
+//		// Check the random chance of taunting.
+//		float tauntChance = Random.Range(0f, 100f);
+//		if(tauntChance > tauntProbability)
+//		{
+//			// Wait for tauntDelay number of seconds.
+//			yield return new WaitForSeconds(tauntDelay);
+//
+//			// If there is no clip currently playing.
+//			if(!GetComponent<AudioSource>().isPlaying)
+//			{
+//				// Choose a random, but different taunt.
+//				tauntIndex = TauntRandom();
+//
+//				// Play the new taunt.
+//				GetComponent<AudioSource>().clip = taunts[tauntIndex];
+//				GetComponent<AudioSource>().Play();
+//			}
+//		}
+//	}
 
-			// If there is no clip currently playing.
-			if(!GetComponent<AudioSource>().isPlaying)
-			{
-				// Choose a random, but different taunt.
-				tauntIndex = TauntRandom();
 
-				// Play the new taunt.
-				GetComponent<AudioSource>().clip = taunts[tauntIndex];
-				GetComponent<AudioSource>().Play();
-			}
-		}
-	}
-
-
-	int TauntRandom()
-	{
-		// Choose a random index of the taunts array.
-		int i = Random.Range(0, taunts.Length);
-
-		// If it's the same as the previous taunt...
-		if(i == tauntIndex)
-			// ... try another random taunt.
-			return TauntRandom();
-		else
-			// Otherwise return this index.
-			return i;
-	}
+//	int TauntRandom()
+//	{
+//		// Choose a random index of the taunts array.
+//		int i = Random.Range(0, taunts.Length);
+//
+//		// If it's the same as the previous taunt...
+//		if(i == tauntIndex)
+//			// ... try another random taunt.
+//			return TauntRandom();
+//		else
+//			// Otherwise return this index.
+//			return i;
+//	}
 }
