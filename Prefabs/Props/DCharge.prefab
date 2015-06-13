@@ -12,9 +12,9 @@ GameObject:
   - 50: {fileID: 5033092}
   - 114: {fileID: 11448504}
   - 82: {fileID: 8296110}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DCharge
-  m_TagString: Bullet
+  m_TagString: Charge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ GameObject:
   - 95: {fileID: 9569750}
   - 82: {fileID: 8240148}
   - 114: {fileID: 11466424}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SharkGameSheet2_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 488728}
   - 212: {fileID: 21230836}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SharkGameSheet1_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7478ff898ebd7da42986aa967a2f5913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boat: {fileID: 0}
 --- !u!212 &21230836
 SpriteRenderer:
   m_ObjectHideFlags: 1

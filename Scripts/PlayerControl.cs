@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour
 	public bool exploded = false;
 
 	public int timeLeft = 0;
-
+	public float rot;
 	void Awake()
 	{
 		// Setting up references.
@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour
 
 		GetComponent<Rigidbody2D> ().AddForce (Vector2.right * maxSpeed * moveForce);
 		StartCoroutine(MyCoroutine2());
-
+		rot = transform.rotation.z;
 	}
 
 	public void test()
@@ -71,9 +71,10 @@ public class PlayerControl : MonoBehaviour
 				}else{
 					dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x - 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
 					dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f * 2);
+
 					
 				}
-				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 1.5f * 1000f * 2);
+				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * GetComponent<Rigidbody2D>().velocity.y * 100f * 2);
 				anim.Play ("sharkIdle");
 
 				switch (timeLeft) {
@@ -127,6 +128,11 @@ public class PlayerControl : MonoBehaviour
 					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
 					timeLeft = -1;
 					break;
+				case -1:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count0");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
 				//default:
 				//	Debug.Log("WTF!?);
 				//	break;
@@ -169,6 +175,8 @@ public class PlayerControl : MonoBehaviour
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis ("Vertical");
+
+		//Debug.Log (GetComponent<Rigidbody2D>().velocity.y);
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
 		if(h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed 
@@ -217,6 +225,9 @@ public class PlayerControl : MonoBehaviour
 			else
 				Flip();
 		}
+		float zTarget =  Mathf.Rad2Deg * Mathf.Atan((GetComponent<Rigidbody2D> ().velocity.y)/(GetComponent<Rigidbody2D> ().velocity.x));
+		rot = Mathf.Round((transform.rotation.z + zTarget) / 3);
+		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
 
 
 
@@ -233,53 +244,53 @@ public class PlayerControl : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).IsName("shareBite"))
-		{
-			AudioSource audio = GetComponent<AudioSource>();
-			audio.Play();
+		if (col.gameObject.tag == "Charge") {
+			if (anim.GetCurrentAnimatorStateInfo (0).IsName ("shareBite")) {
+				AudioSource audio = GetComponent<AudioSource> ();
+				audio.Play ();
 
 
-			//ebug.Log ("CHOMP at " + col.gameObject.GetComponent<Charge>().timeLeft + " seconds");
+				//ebug.Log ("CHOMP at " + col.gameObject.GetComponent<Charge>().timeLeft + " seconds");
 
-			timeLeft = col.gameObject.GetComponent<Charge>().timeLeft - 1;
-			StartCoroutine(MyCoroutine2());
+				timeLeft = col.gameObject.GetComponent<Charge> ().timeLeft;
+				StartCoroutine (MyCoroutine2 ());
 
-			switch(col.gameObject.GetComponent<Charge>().timeLeft){
-			case 9:
+				switch (col.gameObject.GetComponent<Charge> ().timeLeft) {
+				case 9:
 					anim.Play ("sharkBiteCharge");
 					break;
-			case 8:
-				anim.Play ("sharkBiteCharge8");
+				case 8:
+					anim.Play ("sharkBiteCharge8");
 					break;
-			case 7:
-				anim.Play ("sharkBiteCharge7");
+				case 7:
+					anim.Play ("sharkBiteCharge7");
 					break;
-			case 6:
-				anim.Play ("sharkBiteCharge6");
+				case 6:
+					anim.Play ("sharkBiteCharge6");
 					break;
-			case 5:
-				anim.Play ("sharkBiteCharge5");
+				case 5:
+					anim.Play ("sharkBiteCharge5");
 					break;
-			case 4:
-				anim.Play ("sharkBiteCharge4");	
+				case 4:
+					anim.Play ("sharkBiteCharge4");	
 					break;
-			case 3:
-				anim.Play ("sharkBiteCharge3");
+				case 3:
+					anim.Play ("sharkBiteCharge3");
 					break;
-			case 2:
-				anim.Play ("sharkBiteCharge2");
-				break;
-			case 1:
-				anim.Play ("sharkBiteCharge1");
-				break;
-			case 0:
-				anim.Play ("sharkBiteCharge0");
-				break;
+				case 2:
+					anim.Play ("sharkBiteCharge2");
+					break;
+				case 1:
+					anim.Play ("sharkBiteCharge1");
+					break;
+				case 0:
+					anim.Play ("sharkBiteCharge0");
+					break;
+				}
+				Destroy (col.gameObject);
 			}
-			Destroy(col.gameObject);
-		}
 			//anim.SetTrigger("BiteCharge");
-
+		}
 	}
 	
 	

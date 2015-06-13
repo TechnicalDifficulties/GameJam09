@@ -36,7 +36,17 @@ public class Charge : MonoBehaviour
 		case 3:
 			anim.Play ("count3");
 			break;
+		case 2:
+			anim.Play ("count2");
+			break;
+		case 1:
+			anim.Play ("count1");
+			break;
+		case 0:
+			anim.Play ("count0");
+			break;
 		}
+	
 	}
 
 	void Start () 
@@ -78,7 +88,7 @@ public class Charge : MonoBehaviour
 	IEnumerator MyCoroutine()
 	{
 		yield return new WaitForSeconds (.5f);
-		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .5f);
+		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .3f);
 	}
 
 	void OnExplode()
@@ -117,7 +127,7 @@ public class Charge : MonoBehaviour
 			Destroy (gameObject);
 		}
 		// Otherwise if the player manages to shoot himself...
-		else if(col.gameObject.tag != "Bullet")
+		else if(col.gameObject.tag != "Charge")
 		{
 			// Instantiate the explosion and destroy the rocket.
 			OnExplode();

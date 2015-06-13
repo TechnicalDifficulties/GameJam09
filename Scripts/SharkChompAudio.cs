@@ -26,4 +26,9 @@ public class SharkChompAudio : MonoBehaviour {
 	{
 		boat.GetComponent<boat> ().throwCharge ();
 	}
+
+	public void throwMine()
+	{
+		boat.GetComponent<boat> ().throwMine ();
+	}
 }

@@ -6,6 +6,7 @@ public class boat : MonoBehaviour {
 
 	public GameObject torpedo;
 	public GameObject dCharge;
+	public GameObject mine;
 
 	public int difficulty = 1;
 
@@ -16,6 +17,7 @@ public class boat : MonoBehaviour {
 	public GameObject torpedoInstance5;
 
 	public GameObject dChargeInstance1;
+	public GameObject mineInstance1;
 
 	public List<GameObject> torpedos;
 
@@ -44,43 +46,124 @@ public class boat : MonoBehaviour {
 	public bool moveRightB = false;
 	public bool moveLeftB = false;
 
+	public bool wentLeft = true;
+
 	public GameObject duckSprite;
 	public Animator duckanim;
+
+	public bool ready = true;
+
+
+	public Vector3 baseLocalPosition1;
+	public Vector3 baseLocalPosition2;
+	public Vector3 baseLocalPosition3;
+	public Vector3 baseLocalPosition4;
+	public Vector3 baseLocalPosition5;
 
 	// Use this for initialization
 	void Start () {
 		duckanim = duckSprite.GetComponent<Animator>();
+		baseLocalPosition1 = target1.GetComponent<Transform> ().localPosition;
+		baseLocalPosition2 = target2.GetComponent<Transform> ().localPosition;
+		baseLocalPosition3 = target3.GetComponent<Transform> ().localPosition;
+		baseLocalPosition4 = target4.GetComponent<Transform> ().localPosition;
+		baseLocalPosition5 = target5.GetComponent<Transform> ().localPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.P)) {
 			duckanim.SetTrigger("Launch");
-			launchTorpedoes();
+			StartCoroutine(shootXTorpedos(3);
+			//launchTorpedoes();
 		}
 		if (Input.GetKeyDown (KeyCode.O)) {
 			duckanim.SetTrigger("Throw");
-
+		}
+		if (Input.GetKeyDown (KeyCode.L)) {
+			StartCoroutine(throwXMines(3));
+			//duckanim.SetTrigger("ThrowMine");
 		}
 
 		if (Input.GetKeyDown (KeyCode.I)) {
+
+			StartCoroutine(throwXCharges(6));
 			moveRightB = true;
 			moveLeftB = false;
 		}
 
 		if (Input.GetKeyDown (KeyCode.U)) {
+
+			StartCoroutine(throwXCharges(6));
 			moveRightB = false;
 			moveLeftB = true;
+
 		}
 
+		if (ready) {
+			ready = false;
+			int choice = (Random.Range(0,3));
+			switch(choice){
+			case 0:
+				StartCoroutine(throwXMines(3));
+				break;
+			case 1:
+				if(wentLeft){
+					StartCoroutine(throwXCharges(6));
+					moveRightB = true;
+					moveLeftB = false;
+				}
+				else{
+					StartCoroutine(throwXCharges(6));
+					moveRightB = false;
+					moveLeftB = true;
+				}
+				wentLeft = !wentLeft;
+				break;
+			case 2:
+				duckanim.SetTrigger("Launch");
+				StartCoroutine(shootXTorpedos(5));
+				break;
+			}
+		}
+	}
 
 
+
+	IEnumerator throwXCharges(int x)
+	{
+		for (int i = 0; i < x; i ++){
+			yield return new WaitForSeconds (.75f);
+			duckanim.SetTrigger("Throw");
+		}
+		ready = true;
+	}
+
+	IEnumerator shootXTorpedos(int x)
+	{
+		yield return new WaitForSeconds (2);
+		for (int i = 0; i < x; i++) {
+			launchTorpedoes();
+			yield return new WaitForSeconds (1.3f);
+		}
+		ready = true;
 
 	}
+	IEnumerator throwXMines(int x)
+	{
+		for (int i = 0; i < x; i ++) {
+			duckanim.SetTrigger ("ThrowMine");
+			yield return new WaitForSeconds (2f);
+
+		}
+		ready = true;
+	}
+
 
 	public void throwCharge()
 	{
 		dChargeInstance1 = null;
+
 		if(facingRight){
 			dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
 			dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f * Random.Range(.1f, 1f));
@@ -90,6 +173,20 @@ public class boat : MonoBehaviour {
 			
 		}
 		dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 1.5f * 1000f);
+	}
+
+	public void throwMine()
+	{
+		mineInstance1 = null;
+		if(facingRight){
+			mineInstance1 = Instantiate (mine, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+			mineInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f * Random.Range(.1f, 4f));
+		}else{
+			mineInstance1 = Instantiate (mine, new Vector3(transform.position.x - 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+			mineInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f * Random.Range(.1f, 4f));
+			
+		}
+		mineInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 1.5f * 1000f);
 	}
 
 
@@ -228,21 +325,21 @@ public class boat : MonoBehaviour {
 
 	void randomizeTargetLocations()
 	{
-		target1.GetComponent<Transform> ().localPosition = new Vector3 (target1.GetComponent<Transform> ().localPosition.x + Random.Range(-3, 3),
-		                                                              target1.GetComponent<Transform> ().localPosition.y,
-		                                                              target1.GetComponent<Transform> ().localPosition.z);
-		target2.GetComponent<Transform> ().localPosition = new Vector3 (target2.GetComponent<Transform> ().localPosition.x + Random.Range(-3, 3),
-		                                                                target2.GetComponent<Transform> ().localPosition.y,
-		                                                                target2.GetComponent<Transform> ().localPosition.z);
-		target3.GetComponent<Transform> ().localPosition = new Vector3 (target3.GetComponent<Transform> ().localPosition.x + Random.Range(-3, 3),
-		                                                                target3.GetComponent<Transform> ().localPosition.y,
-		                                                                target3.GetComponent<Transform> ().localPosition.z);
-		target4.GetComponent<Transform> ().localPosition = new Vector3 (target4.GetComponent<Transform> ().localPosition.x + Random.Range(-3, 3),
-		                                                                target4.GetComponent<Transform> ().localPosition.y,
-		                                                                target4.GetComponent<Transform> ().localPosition.z);
-		target5.GetComponent<Transform> ().localPosition = new Vector3 (target5.GetComponent<Transform> ().localPosition.x + Random.Range(-3, 3),
-		                                                                target5.GetComponent<Transform> ().localPosition.y,
-		                                                                target5.GetComponent<Transform> ().localPosition.z);
+		target1.GetComponent<Transform> ().localPosition = new Vector3 (baseLocalPosition1.x+ Random.Range(-3, 3),
+		                                                                baseLocalPosition1.y,
+		                                                                baseLocalPosition1.z);
+		target2.GetComponent<Transform> ().localPosition = new Vector3 (baseLocalPosition2.x + Random.Range(-3, 3),
+		                                                                baseLocalPosition2.y,
+		                                                                baseLocalPosition2.z);
+		target3.GetComponent<Transform> ().localPosition = new Vector3 (baseLocalPosition3.x + Random.Range(-3, 3),
+		                                                                baseLocalPosition3.y,
+		                                                                baseLocalPosition3.z);
+		target4.GetComponent<Transform> ().localPosition = new Vector3 (baseLocalPosition4.x + Random.Range(-3, 3),
+		                                                                baseLocalPosition4.y,
+		                                                                baseLocalPosition4.z);
+		target5.GetComponent<Transform> ().localPosition = new Vector3 (baseLocalPosition5.x + Random.Range(-3, 3),
+		                                                                baseLocalPosition5.y,
+		                                                                baseLocalPosition5.z);
 
 	}
 
@@ -315,11 +412,5 @@ public class boat : MonoBehaviour {
 			torpedos.Remove (randomTorpedo);
 			Destroy (randomTorpedo);
 		}
-
-
-
-
-
-		//put each torpedo in an array
 	}
 }
