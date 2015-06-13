@@ -76,6 +76,9 @@ public class boat : MonoBehaviour {
 			moveLeftB = true;
 		}
 
+
+
+
 	}
 
 	void FixedUpdate(){

@@ -4,12 +4,39 @@ using System.Collections;
 public class Charge : MonoBehaviour 
 {
 	public GameObject explosion;		// Prefab of explosion effect.
+	public GameObject countSprite;
+	public Animator anim;
 
 
 	void Start () 
 	{
 		// Destroy the rocket after 2 seconds if it doesn't get destroyed before then.
-		Destroy(gameObject, 20);
+		anim = countSprite.GetComponent<Animator> ();
+		int timeLeft = Random.Range (3, 9);
+		switch (timeLeft) {
+		case 9:
+			anim.Play("countdown");
+			break;
+		case 8:
+			anim.Play ("count8");
+			break;
+		case 7:
+			anim.Play ("count7");
+			break;
+		case 6:
+			anim.Play ("count6");
+			break;
+		case 5:
+			anim.Play ("count5");
+			break;
+		case 4:
+			anim.Play ("count4");
+			break;
+		case 3:
+			anim.Play ("count3");
+			break;
+		}
+		Destroy(gameObject, timeLeft);
 		StartCoroutine(MyCoroutine());
 		//GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
 	}
@@ -25,7 +52,7 @@ public class Charge : MonoBehaviour
 	IEnumerator MyCoroutine()
 	{
 		yield return new WaitForSeconds (.5f);
-		GetComponent<Rigidbody2D> ().gravityScale = .25f;
+		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .5f);
 	}
 
 	void OnExplode()
@@ -46,10 +73,10 @@ public class Charge : MonoBehaviour
 			//col.gameObject.GetComponent<Enemy>().Hurt();
 
 			// Call the explosion instantiation.
-			OnExplode();
+			//OnExplode();
 
 			// Destroy the rocket.
-			Destroy (gameObject);
+			//Destroy (gameObject);
 		}
 		// Otherwise if it hits a bomb crate...
 		else if(col.tag == "BombPickup")

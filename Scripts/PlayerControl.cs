@@ -23,15 +23,15 @@ public class PlayerControl : MonoBehaviour
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
-
-//	public float h;
-
+	public GameObject sprite;
+	
 
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
-		anim = GetComponent<Animator>();
+		anim = sprite.GetComponent<Animator>();
+
 	}
 
 	void Start()
@@ -42,26 +42,11 @@ public class PlayerControl : MonoBehaviour
 
 	void Update()
 	{
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		//grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
-		// If the jump button is pressed and the player is grounded then the player should jump.
-//		if(Input.GetButtonDown("Jump") && grounded)
-//			jump = true;
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			anim.SetTrigger("Bite");
+		}
 
-//		if (Input.GetKey (KeyCode.A)) {
-//			h = -1f;
-//		} else if (Input.GetKey (KeyCode.D)) {
-//			h = 1f;
-//		} else {
-//			h = 0f;
-//		}
-
-//		if (Input.GetKeyDown (KeyCode.Space)){
-//			// ... flip the player.
-//			Flip();
-//			GetComponent<Rigidbody2D>().velocity = new Vector2((GetComponent<Rigidbody2D>().velocity.x) * -1 , GetComponent<Rigidbody2D>().velocity.y);
-//		}
 	}
 
 
@@ -70,38 +55,21 @@ public class PlayerControl : MonoBehaviour
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis ("Vertical");
-		float vOff = 1f;
-
-		// The Speed animator parameter is set to the absolute value of the horizontal input.
-		anim.SetFloat("Speed", Mathf.Abs(h));
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-//		if (h * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
-//			// ... add a force to the player.
-//		if (facingRight && h > 0) {
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		} else if (!facingRight && h < 0) {
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		}
-//		else if(h != 0)
-//			GetComponent<Rigidbody2D> ().drag = 5 * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x * .1f);
-//		else {
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		}
-			
-					
-
+		if(h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
+			// ... add a force to the player.
+			GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce);
+		
 		// If the player's horizontal velocity is greater than the maxSpeed...
-//		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
-//			// ... set the player's velocity to the maxSpeed in the x axis.
-//			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
-//
+		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
+			// ... set the player's velocity to the maxSpeed in the x axis.
+			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed , GetComponent<Rigidbody2D>().velocity.y );
+
 //		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
 		if(v * GetComponent<Rigidbody2D>().velocity.y < maxSpeedy)
 			// ... add a force to the player.
-			GetComponent<Rigidbody2D>().AddForce(Vector2.up * v * moveForce * vOff);
+			GetComponent<Rigidbody2D>().AddForce(Vector2.up * v * moveForce);
 		
 		// If the player's horizontal velocity is greater than the maxSpeed...
 		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > maxSpeedy)
@@ -120,22 +88,16 @@ public class PlayerControl : MonoBehaviour
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 ((GetComponent<Rigidbody2D> ().velocity.x) * -1, GetComponent<Rigidbody2D> ().velocity.y);
 		}
 
-//		// If the player should jump...
-//		if(jump)
-//		{
-//			// Set the Jump animator trigger parameter.
-//			anim.SetTrigger("Jump");
-//
-//			// Play a random jump audio clip.
-//			int i = Random.Range(0, jumpClips.Length);
-//			AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
-//
-//			// Add a vertical force to the player.
-//			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-//
-//			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-//			jump = false;
-//		}
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName("shareBite"))
+		{
+			Debug.Log ("CHOMP!");
+			Destroy(col.gameObject);
+			anim.SetTrigger("BiteCharge");
+		}
 	}
 	
 	
@@ -151,40 +113,4 @@ public class PlayerControl : MonoBehaviour
 	}
 
 
-//	public IEnumerator Taunt()
-//	{
-//		// Check the random chance of taunting.
-//		float tauntChance = Random.Range(0f, 100f);
-//		if(tauntChance > tauntProbability)
-//		{
-//			// Wait for tauntDelay number of seconds.
-//			yield return new WaitForSeconds(tauntDelay);
-//
-//			// If there is no clip currently playing.
-//			if(!GetComponent<AudioSource>().isPlaying)
-//			{
-//				// Choose a random, but different taunt.
-//				tauntIndex = TauntRandom();
-//
-//				// Play the new taunt.
-//				GetComponent<AudioSource>().clip = taunts[tauntIndex];
-//				GetComponent<AudioSource>().Play();
-//			}
-//		}
-//	}
-
-
-//	int TauntRandom()
-//	{
-//		// Choose a random index of the taunts array.
-//		int i = Random.Range(0, taunts.Length);
-//
-//		// If it's the same as the previous taunt...
-//		if(i == tauntIndex)
-//			// ... try another random taunt.
-//			return TauntRandom();
-//		else
-//			// Otherwise return this index.
-//			return i;
-//	}
 }
