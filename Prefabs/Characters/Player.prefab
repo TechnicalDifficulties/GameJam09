@@ -163,8 +163,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f21105ab30098e141919027d732fb8a9, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_PlayOnAwake: 1
+  m_Volume: .5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -397,8 +397,12 @@ MonoBehaviour:
   explosion: {fileID: 100000, guid: 42404bf7d14c342f69690c9961a7530d, type: 2}
   chop1: {fileID: 8300000, guid: b26e13b203c0c004285eb4e5d835c983, type: 3}
   chop2: {fileID: 8300000, guid: f21105ab30098e141919027d732fb8a9, type: 3}
+  spit: {fileID: 0}
   exploded: 0
   timeLeft: -1
+  rot: 0
+  gotHit: 0
+  flickering: 0
 --- !u!114 &11495560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7478ff898ebd7da42986aa967a2f5913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boat: {fileID: 0}
 --- !u!212 &21258838
 SpriteRenderer:
   m_ObjectHideFlags: 1
