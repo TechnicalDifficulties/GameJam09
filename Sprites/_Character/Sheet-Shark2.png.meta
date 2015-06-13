@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: b3f650db271978040866c7e8aac03cb0
-timeCreated: 1434226565
+timeCreated: 1434228674
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Sheet-Shark2_0
+    21300002: Sheet-Shark2_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +32,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +50,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Sheet-Shark2_0
+      rect:
+        serializedVersion: 2
+        x: 3282
+        y: 6253
+        width: 1570
+        height: 822
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Shark2_1
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 4479
+        width: 2053
+        height: 1457
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

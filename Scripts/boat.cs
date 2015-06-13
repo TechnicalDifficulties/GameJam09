@@ -63,6 +63,8 @@ public class boat : MonoBehaviour {
 	public Vector3 baseLocalPosition4;
 	public Vector3 baseLocalPosition5;
 
+	public int damage = 0;
+
 	// Use this for initialization
 	void Start () {
 		duckanim = duckSprite.GetComponent<Animator>();
@@ -164,7 +166,7 @@ public class boat : MonoBehaviour {
 
 	IEnumerator handleDamage(){
 		gotHit = true;
-		Debug.Log ("Boat hit!");
+		damage++;
 		GetComponent<BoxCollider2D> ().enabled = false;
 		yield return new WaitForSeconds(3);
 		GetComponent<BoxCollider2D> ().enabled = true;
