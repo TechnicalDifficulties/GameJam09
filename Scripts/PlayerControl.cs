@@ -41,6 +41,8 @@ public class PlayerControl : MonoBehaviour
 	public bool gotHit = false;
 	public bool flickering = false;
 
+	public int damage = 0;
+
 	AudioSource audio;
 	void Awake()
 	{
@@ -101,8 +103,8 @@ public class PlayerControl : MonoBehaviour
 
 					
 				}
-				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * GetComponent<Rigidbody2D>().velocity.y * 100f * 2);
-				anim.Play ("sharkIdle");
+				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * GetComponent<Rigidbody2D>().velocity.y * 100f * 3);
+				anim.Play ("sharkSpit");
 
 				switch (timeLeft) {
 				case 9:
@@ -184,6 +186,10 @@ public class PlayerControl : MonoBehaviour
 			Flip();
 		}
 
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("spitFinished")) {
+			anim.Play ("sharkIdle");
+		}
+
 	}
 
 	IEnumerator MyCoroutine2()
@@ -258,8 +264,8 @@ public class PlayerControl : MonoBehaviour
 		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
 
 
-		if (transform.position.y > 6.5f) {
-			transform.position = new Vector3 (transform.position.x, 6.5f, transform.position.z);
+		if (transform.position.y > 4.3f) {
+			transform.position = new Vector3 (transform.position.x, 4.3f, transform.position.z);
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
 		}
 
@@ -299,6 +305,7 @@ public class PlayerControl : MonoBehaviour
 
 	IEnumerator handleDamage(){
 		gotHit = true;
+		damage++;
 		GetComponent<CircleCollider2D> ().enabled = false;
 		yield return new WaitForSeconds(3);
 		GetComponent<CircleCollider2D> ().enabled = true;
