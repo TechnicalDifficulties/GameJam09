@@ -11,7 +11,8 @@ GameObject:
   - 61: {fileID: 6184410}
   - 50: {fileID: 5011556}
   - 114: {fileID: 11469634}
-  m_Layer: 0
+  - 61: {fileID: 6120582}
+  m_Layer: 16
   m_Name: Torpedo
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -27,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 418564}
   - 212: {fileID: 21285390}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SharkGameSheet1_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +46,7 @@ GameObject:
   - 198: {fileID: 19812212}
   - 199: {fileID: 19947524}
   - 114: {fileID: 11400662}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +63,7 @@ GameObject:
   - 4: {fileID: 459722}
   - 212: {fileID: 21247304}
   - 95: {fileID: 9563272}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +136,19 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!61 &6120582
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117438}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -.0299999993, y: 0}
+  serializedVersion: 2
+  m_Size: {x: .419999987, y: .439999998}
 --- !u!61 &6184410
 BoxCollider2D:
   m_ObjectHideFlags: 1

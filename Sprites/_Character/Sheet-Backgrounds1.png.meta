@@ -1,9 +1,32 @@
 fileFormatVersion: 2
 guid: 1d55eec4f09bfa745966fd5144728925
-timeCreated: 1434181578
+timeCreated: 1434200973
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Sheet-Backgrounds1_0
+    21300002: Sheet-Backgrounds1_1
+    21300004: Sheet-Backgrounds1_2
+    21300006: Sheet-Backgrounds1_3
+    21300008: Sheet-Backgrounds1_4
+    21300010: Sheet-Backgrounds1_5
+    21300012: Sheet-Backgrounds1_6
+    21300014: Sheet-Backgrounds1_7
+    21300016: Sheet-Backgrounds1_8
+    21300018: Sheet-Backgrounds1_9
+    21300020: Sheet-Backgrounds1_10
+    21300022: Sheet-Backgrounds1_11
+    21300024: Sheet-Backgrounds1_12
+    21300026: Sheet-Backgrounds1_13
+    21300028: Sheet-Backgrounds1_14
+    21300030: Sheet-Backgrounds1_15
+    21300032: Sheet-Backgrounds1_16
+    21300034: Sheet-Backgrounds1_17
+    21300036: Sheet-Backgrounds1_18
+    21300038: Sheet-Backgrounds1_19
+    21300040: Sheet-Backgrounds1_20
+    21300042: Sheet-Backgrounds1_21
+    21300044: Sheet-Backgrounds1_22
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +53,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +71,237 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Sheet-Backgrounds1_0
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 8406
+        width: 4901
+        height: 657
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 7476
+        width: 2675
+        height: 218
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_2
+      rect:
+        serializedVersion: 2
+        x: 2828
+        y: 7476
+        width: 1207
+        height: 318
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_3
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 7113
+        width: 3390
+        height: 231
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_4
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 5938
+        width: 670
+        height: 221
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_5
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 5938
+        width: 2273
+        height: 217
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_6
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 5933
+        width: 1222
+        height: 349
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_7
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 4928
+        width: 1254
+        height: 364
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_8
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 4919
+        width: 642
+        height: 344
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_9
+      rect:
+        serializedVersion: 2
+        x: 2111
+        y: 4919
+        width: 1240
+        height: 297
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_10
+      rect:
+        serializedVersion: 2
+        x: 3417
+        y: 4924
+        width: 1245
+        height: 254
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_11
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 4504
+        width: 623
+        height: 132
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_12
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 3305
+        width: 660
+        height: 350
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_13
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 3300
+        width: 3727
+        height: 373
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_14
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 2074
+        width: 382
+        height: 170
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_15
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 2069
+        width: 1188
+        height: 896
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_16
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 2069
+        width: 227
+        height: 208
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_17
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 2069
+        width: 599
+        height: 141
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_18
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1097
+        width: 589
+        height: 288
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_19
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 1088
+        width: 378
+        height: 455
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_20
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 1088
+        width: 1321
+        height: 391
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_21
+      rect:
+        serializedVersion: 2
+        x: 2526
+        y: 1088
+        width: 693
+        height: 217
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Backgrounds1_22
+      rect:
+        serializedVersion: 2
+        x: 3271
+        y: 1088
+        width: 443
+        height: 599
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

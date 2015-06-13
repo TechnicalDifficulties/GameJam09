@@ -23,45 +23,150 @@ public class PlayerControl : MonoBehaviour
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
+	public GameObject sprite;
 
-//	public float h;
+	public GameObject dCharge;
+	public GameObject dChargeInstance1;
+	public GameObject explosion;
 
+	public AudioClip chop1;
+	public AudioClip chop2;
 
+	public bool exploded = false;
+
+	public int timeLeft = 0;
+	public float rot;
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
-		anim = GetComponent<Animator>();
+		anim = sprite.GetComponent<Animator>();
+
 	}
 
 	void Start()
 	{
+
 		GetComponent<Rigidbody2D> ().AddForce (Vector2.right * maxSpeed * moveForce);
+		StartCoroutine(MyCoroutine2());
+		rot = transform.rotation.z;
 	}
 
+	public void test()
+	{
+
+	}
 
 	void Update()
 	{
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		//grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
-		// If the jump button is pressed and the player is grounded then the player should jump.
-//		if(Input.GetButtonDown("Jump") && grounded)
-//			jump = true;
+		if (Input.GetKeyDown (KeyCode.Space)) {
 
-//		if (Input.GetKey (KeyCode.A)) {
-//			h = -1f;
-//		} else if (Input.GetKey (KeyCode.D)) {
-//			h = 1f;
-//		} else {
-//			h = 0f;
-//		}
 
-//		if (Input.GetKeyDown (KeyCode.Space)){
-//			// ... flip the player.
-//			Flip();
-//			GetComponent<Rigidbody2D>().velocity = new Vector2((GetComponent<Rigidbody2D>().velocity.x) * -1 , GetComponent<Rigidbody2D>().velocity.y);
-//		}
+			if(timeLeft >= 0){
+				dChargeInstance1 = null;
+				if(facingRight){
+					dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+					dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f * 2);
+				}else{
+					dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x - 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+					dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f * 2);
+
+					
+				}
+				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * GetComponent<Rigidbody2D>().velocity.y * 100f * 2);
+				anim.Play ("sharkIdle");
+
+				switch (timeLeft) {
+				case 9:
+					dChargeInstance1.GetComponent<Charge>().anim.Play("countdown");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 8:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count8");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 7:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count7");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 6:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count6");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 5:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count5");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 4:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count4");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 3:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count3");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 2:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count2");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 1:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count1");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case 0:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count0");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				case -1:
+					dChargeInstance1.GetComponent<Charge>().anim.Play ("count0");
+					dChargeInstance1.GetComponent<Charge>().timeLeft = timeLeft;
+					timeLeft = -1;
+					break;
+				//default:
+				//	Debug.Log("WTF!?);
+				//	break;
+				}
+
+			}
+			else
+				anim.SetTrigger("Bite");
+
+		}
+
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("explode2")) {
+
+			OnExplode();
+			anim.Play ("sharkIdle");
+				//Destroy(gameObject);
+
+		}
+
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("flipFinished")) {
+			anim.Play ("sharkIdle");
+			Flip();
+		}
+
+	}
+
+	IEnumerator MyCoroutine2()
+	{
+		//Debug.Log ("Test");
+		while (timeLeft >= 0) {
+			//Debug.Log(timeLeft);
+			yield return new WaitForSeconds (1);
+			timeLeft--;
+		}
 	}
 
 
@@ -70,38 +175,26 @@ public class PlayerControl : MonoBehaviour
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis ("Vertical");
-		float vOff = 1f;
 
-		// The Speed animator parameter is set to the absolute value of the horizontal input.
-		anim.SetFloat("Speed", Mathf.Abs(h));
+		//Debug.Log (GetComponent<Rigidbody2D>().velocity.y);
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-//		if (h * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
-//			// ... add a force to the player.
-//		if (facingRight && h > 0) {
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		} else if (!facingRight && h < 0) {
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		}
-//		else if(h != 0)
-//			GetComponent<Rigidbody2D> ().drag = 5 * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x * .1f);
-//		else {
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		}
-			
-					
-
+		if(h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed 
+		   //&& !anim.GetCurrentAnimatorStateInfo(0).IsName("shareBite") 
+		   && !anim.GetCurrentAnimatorStateInfo(0).IsName("sharkFlip") 
+		   && !anim.GetCurrentAnimatorStateInfo(0).IsName("flipFinished"))
+			// ... add a force to the player.
+			GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce);
+		
 		// If the player's horizontal velocity is greater than the maxSpeed...
-//		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
-//			// ... set the player's velocity to the maxSpeed in the x axis.
-//			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
-//
+		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
+			// ... set the player's velocity to the maxSpeed in the x axis.
+			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed , GetComponent<Rigidbody2D>().velocity.y );
+
 //		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
 		if(v * GetComponent<Rigidbody2D>().velocity.y < maxSpeedy)
 			// ... add a force to the player.
-			GetComponent<Rigidbody2D>().AddForce(Vector2.up * v * moveForce * vOff);
+			GetComponent<Rigidbody2D>().AddForce(Vector2.up * v * moveForce);
 		
 		// If the player's horizontal velocity is greater than the maxSpeed...
 		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > maxSpeedy)
@@ -109,33 +202,95 @@ public class PlayerControl : MonoBehaviour
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x , Mathf.Sign(GetComponent<Rigidbody2D>().velocity.y) * maxSpeedy);
 
 		// If the input is moving the player right and the player is facing left...
-		if (h > 0 && !facingRight) {
-			Flip ();
+		if (h > 0 && !facingRight 
+		    //&& !anim.GetCurrentAnimatorStateInfo(0).IsName("shareBite") 
+		    && !anim.GetCurrentAnimatorStateInfo(0).IsName("sharkFlip")
+		    && !anim.GetCurrentAnimatorStateInfo(0).IsName("flipFinished")) {
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 ((GetComponent<Rigidbody2D> ().velocity.x) * -1, GetComponent<Rigidbody2D> ().velocity.y);
+			if(anim.GetCurrentAnimatorStateInfo(0).IsName("sharkIdle"))
+				anim.Play ("sharkFlip");
+			else
+				Flip();
+
 		}
 
 //		// Otherwise if the input is moving the player left and the player is facing right...
-		else if (h < 0 && facingRight) {
-			Flip ();
+		else if (h < 0 && facingRight 
+		         //&& !anim.GetCurrentAnimatorStateInfo(0).IsName("shareBite") 
+		         && !anim.GetCurrentAnimatorStateInfo(0).IsName("sharkFlip")
+		         && !anim.GetCurrentAnimatorStateInfo(0).IsName("flipFinished")) {
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 ((GetComponent<Rigidbody2D> ().velocity.x) * -1, GetComponent<Rigidbody2D> ().velocity.y);
+			if(anim.GetCurrentAnimatorStateInfo(0).IsName("sharkIdle"))
+				anim.Play ("sharkFlip");
+			else
+				Flip();
 		}
+		float zTarget =  Mathf.Rad2Deg * Mathf.Atan((GetComponent<Rigidbody2D> ().velocity.y)/(GetComponent<Rigidbody2D> ().velocity.x));
+		rot = Mathf.Round((transform.rotation.z + zTarget) / 3);
+		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
 
-//		// If the player should jump...
-//		if(jump)
-//		{
-//			// Set the Jump animator trigger parameter.
-//			anim.SetTrigger("Jump");
-//
-//			// Play a random jump audio clip.
-//			int i = Random.Range(0, jumpClips.Length);
-//			AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
-//
-//			// Add a vertical force to the player.
-//			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-//
-//			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-//			jump = false;
-//		}
+
+
+	}
+
+	void OnExplode()
+	{
+		// Create a quaternion with a random rotation in the z-axis.
+		Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+		
+		// Instantiate the explosion where the rocket is with the random rotation.
+		Instantiate(explosion, transform.position, randomRotation);
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.tag == "Charge") {
+			if (anim.GetCurrentAnimatorStateInfo (0).IsName ("shareBite")) {
+				AudioSource audio = GetComponent<AudioSource> ();
+				audio.Play ();
+
+
+				//ebug.Log ("CHOMP at " + col.gameObject.GetComponent<Charge>().timeLeft + " seconds");
+
+				timeLeft = col.gameObject.GetComponent<Charge> ().timeLeft;
+				StartCoroutine (MyCoroutine2 ());
+
+				switch (col.gameObject.GetComponent<Charge> ().timeLeft) {
+				case 9:
+					anim.Play ("sharkBiteCharge");
+					break;
+				case 8:
+					anim.Play ("sharkBiteCharge8");
+					break;
+				case 7:
+					anim.Play ("sharkBiteCharge7");
+					break;
+				case 6:
+					anim.Play ("sharkBiteCharge6");
+					break;
+				case 5:
+					anim.Play ("sharkBiteCharge5");
+					break;
+				case 4:
+					anim.Play ("sharkBiteCharge4");	
+					break;
+				case 3:
+					anim.Play ("sharkBiteCharge3");
+					break;
+				case 2:
+					anim.Play ("sharkBiteCharge2");
+					break;
+				case 1:
+					anim.Play ("sharkBiteCharge1");
+					break;
+				case 0:
+					anim.Play ("sharkBiteCharge0");
+					break;
+				}
+				Destroy (col.gameObject);
+			}
+			//anim.SetTrigger("BiteCharge");
+		}
 	}
 	
 	
@@ -148,43 +303,9 @@ public class PlayerControl : MonoBehaviour
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+		//GetComponent<Rigidbody2D> ().velocity = new Vector2 ((GetComponent<Rigidbody2D> ().velocity.x) * -1, GetComponent<Rigidbody2D> ().velocity.y);
+		//anim.Play ("sharkIdle");
 	}
 
 
-//	public IEnumerator Taunt()
-//	{
-//		// Check the random chance of taunting.
-//		float tauntChance = Random.Range(0f, 100f);
-//		if(tauntChance > tauntProbability)
-//		{
-//			// Wait for tauntDelay number of seconds.
-//			yield return new WaitForSeconds(tauntDelay);
-//
-//			// If there is no clip currently playing.
-//			if(!GetComponent<AudioSource>().isPlaying)
-//			{
-//				// Choose a random, but different taunt.
-//				tauntIndex = TauntRandom();
-//
-//				// Play the new taunt.
-//				GetComponent<AudioSource>().clip = taunts[tauntIndex];
-//				GetComponent<AudioSource>().Play();
-//			}
-//		}
-//	}
-
-
-//	int TauntRandom()
-//	{
-//		// Choose a random index of the taunts array.
-//		int i = Random.Range(0, taunts.Length);
-//
-//		// If it's the same as the previous taunt...
-//		if(i == tauntIndex)
-//			// ... try another random taunt.
-//			return TauntRandom();
-//		else
-//			// Otherwise return this index.
-//			return i;
-//	}
 }

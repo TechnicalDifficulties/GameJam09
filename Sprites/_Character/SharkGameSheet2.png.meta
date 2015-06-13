@@ -1,9 +1,39 @@
 fileFormatVersion: 2
 guid: e40e1fa038c72de4facb0ff40f0cd7a5
-timeCreated: 1434177298
+timeCreated: 1434177700
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: SharkGameSheet2_0
+    21300002: SharkGameSheet2_1
+    21300004: SharkGameSheet2_2
+    21300006: SharkGameSheet2_3
+    21300008: SharkGameSheet2_4
+    21300010: SharkGameSheet2_5
+    21300012: SharkGameSheet2_6
+    21300014: SharkGameSheet2_7
+    21300016: SharkGameSheet2_8
+    21300018: SharkGameSheet2_9
+    21300020: SharkGameSheet2_10
+    21300022: SharkGameSheet2_11
+    21300024: SharkGameSheet2_12
+    21300026: SharkGameSheet2_13
+    21300028: SharkGameSheet2_14
+    21300030: SharkGameSheet2_15
+    21300032: SharkGameSheet2_16
+    21300034: SharkGameSheet2_17
+    21300036: SharkGameSheet2_18
+    21300038: SharkGameSheet2_19
+    21300040: SharkGameSheet2_20
+    21300042: SharkGameSheet2_21
+    21300044: SharkGameSheet2_22
+    21300046: SharkGameSheet2_23
+    21300048: SharkGameSheet2_24
+    21300050: SharkGameSheet2_25
+    21300052: SharkGameSheet2_26
+    21300054: SharkGameSheet2_27
+    21300056: SharkGameSheet2_28
+    21300058: SharkGameSheet2_29
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +60,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +78,307 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: SharkGameSheet2_0
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 9751
+        width: 1323
+        height: 973
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_1
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 9751
+        width: 1311
+        height: 973
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_2
+      rect:
+        serializedVersion: 2
+        x: 3406
+        y: 9751
+        width: 1274
+        height: 973
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_3
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 8521
+        width: 1274
+        height: 972
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_4
+      rect:
+        serializedVersion: 2
+        x: 3562
+        y: 8510
+        width: 1209
+        height: 972
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_5
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 7344
+        width: 1043
+        height: 1053
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_6
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 7408
+        width: 1092
+        height: 978
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_7
+      rect:
+        serializedVersion: 2
+        x: 2917
+        y: 7451
+        width: 1064
+        height: 930
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_8
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 6054
+        width: 1322
+        height: 983
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_9
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 6027
+        width: 1290
+        height: 1075
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_10
+      rect:
+        serializedVersion: 2
+        x: 3191
+        y: 6124
+        width: 1467
+        height: 951
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_11
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 5113
+        width: 1295
+        height: 694
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_12
+      rect:
+        serializedVersion: 2
+        x: 1917
+        y: 4554
+        width: 774
+        height: 1204
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_13
+      rect:
+        serializedVersion: 2
+        x: 2949
+        y: 5307
+        width: 499
+        height: 478
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_14
+      rect:
+        serializedVersion: 2
+        x: 3618
+        y: 5291
+        width: 626
+        height: 666
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_15
+      rect:
+        serializedVersion: 2
+        x: 2884
+        y: 4597
+        width: 565
+        height: 629
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_16
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 4597
+        width: 526
+        height: 543
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_17
+      rect:
+        serializedVersion: 2
+        x: 4287
+        y: 4587
+        width: 554
+        height: 704
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_18
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 4721
+        width: 210
+        height: 269
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_19
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 4710
+        width: 215
+        height: 285
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_20
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 4721
+        width: 199
+        height: 269
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_21
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 4710
+        width: 204
+        height: 287
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_22
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 4710
+        width: 204
+        height: 285
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_23
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 4372
+        width: 210
+        height: 242
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_24
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 4361
+        width: 199
+        height: 285
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_25
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 4353
+        width: 199
+        height: 287
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_26
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 4377
+        width: 38
+        height: 242
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_27
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 4361
+        width: 210
+        height: 285
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_28
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 2948
+        width: 1764
+        height: 1322
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SharkGameSheet2_29
+      rect:
+        serializedVersion: 2
+        x: 2180
+        y: 3700
+        width: 677
+        height: 709
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
