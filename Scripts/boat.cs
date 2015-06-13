@@ -53,6 +53,9 @@ public class boat : MonoBehaviour {
 
 	public bool ready = true;
 
+	public bool gotHit = false;
+
+	public bool flickering = false;
 
 	public Vector3 baseLocalPosition1;
 	public Vector3 baseLocalPosition2;
@@ -69,12 +72,34 @@ public class boat : MonoBehaviour {
 		baseLocalPosition4 = target4.GetComponent<Transform> ().localPosition;
 		baseLocalPosition5 = target5.GetComponent<Transform> ().localPosition;
 	}
-	
+
+	IEnumerator flicker()
+	{
+		Debug.Log ("flickering");
+		for (int i = 0; i < 15; i++) {
+			duckSprite.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			yield return new WaitForSeconds (.1f);
+			duckSprite.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			yield return new WaitForSeconds (.1f);
+		}
+		duckSprite.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+		flickering = false;
+	}
+
 	// Update is called once per frame
 	void Update () {
+
+		if(gotHit)
+		{
+			if(!flickering){
+				flickering = true;
+				StartCoroutine(flicker());
+			}
+		}
+
 		if (Input.GetKeyDown (KeyCode.P)) {
 			duckanim.SetTrigger("Launch");
-			StartCoroutine(shootXTorpedos(3);
+			StartCoroutine(shootXTorpedos(3));
 			//launchTorpedoes();
 		}
 		if (Input.GetKeyDown (KeyCode.O)) {
@@ -122,13 +147,30 @@ public class boat : MonoBehaviour {
 				break;
 			case 2:
 				duckanim.SetTrigger("Launch");
-				StartCoroutine(shootXTorpedos(5));
+				StartCoroutine(shootXTorpedos(3));
 				break;
 			}
 		}
 	}
 
+	void OnTriggerEnter2D (Collider2D col) {
+		if (col.tag == "Explosion") {
+			if(!gotHit){
+				
+				StartCoroutine(handleDamage());
+			}
+		}
+	}
 
+	IEnumerator handleDamage(){
+		gotHit = true;
+		Debug.Log ("Boat hit!");
+		GetComponent<BoxCollider2D> ().enabled = false;
+		yield return new WaitForSeconds(3);
+		GetComponent<BoxCollider2D> ().enabled = true;
+		
+		gotHit = false;
+	}
 
 	IEnumerator throwXCharges(int x)
 	{

@@ -31,16 +31,23 @@ public class PlayerControl : MonoBehaviour
 
 	public AudioClip chop1;
 	public AudioClip chop2;
+	public AudioClip spit;
 
 	public bool exploded = false;
 
 	public int timeLeft = 0;
 	public float rot;
+
+	public bool gotHit = false;
+	public bool flickering = false;
+
+	AudioSource audio;
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
 		anim = sprite.GetComponent<Animator>();
+		audio = GetComponent<AudioSource> ();
 
 	}
 
@@ -52,18 +59,38 @@ public class PlayerControl : MonoBehaviour
 		rot = transform.rotation.z;
 	}
 
-	public void test()
-	{
 
+
+	IEnumerator flicker()
+	{
+		//Debug.Log ("flickering");
+		for (int i = 0; i < 15; i++) {
+			sprite.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			yield return new WaitForSeconds (.1f);
+			sprite.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			yield return new WaitForSeconds (.1f);
+		}
+		sprite.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+		flickering = false;
 	}
 
 	void Update()
 	{
-
+		if(gotHit)
+		{
+			if(!flickering){
+				flickering = true;
+				StartCoroutine(flicker());
+			}
+		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 
 
+
 			if(timeLeft >= 0){
+				audio.clip = spit;
+				audio.Play ();
+
 				dChargeInstance1 = null;
 				if(facingRight){
 					dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
@@ -172,6 +199,7 @@ public class PlayerControl : MonoBehaviour
 
 	void FixedUpdate ()
 	{
+
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis ("Vertical");
@@ -230,23 +258,60 @@ public class PlayerControl : MonoBehaviour
 		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
 
 
+		if (transform.position.y > 6.5f) {
+			transform.position = new Vector3 (transform.position.x, 6.5f, transform.position.z);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
+		}
 
+		
+		if (transform.position.y < -14.2f) {
+			transform.position = new Vector3 (transform.position.x, -14.2f, transform.position.z);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
+		}
+
+		if (transform.position.x > 25f) {
+			transform.position = new Vector3 (25f,transform.position.y, transform.position.z);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+		}
+
+		if (transform.position.x < -25f) {
+			transform.position = new Vector3 (-25f,transform.position.y, transform.position.z);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+		}
 	}
 
 	void OnExplode()
 	{
 		// Create a quaternion with a random rotation in the z-axis.
 		Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-		
+
 		// Instantiate the explosion where the rocket is with the random rotation.
 		Instantiate(explosion, transform.position, randomRotation);
 	}
+	void OnTriggerEnter2D (Collider2D col) {
+		if (col.tag == "Explosion") {
+			if(!gotHit){
 
+				StartCoroutine(handleDamage());
+			}
+		}
+	}
+
+	IEnumerator handleDamage(){
+		gotHit = true;
+		GetComponent<CircleCollider2D> ().enabled = false;
+		yield return new WaitForSeconds(3);
+		GetComponent<CircleCollider2D> ().enabled = true;
+
+		gotHit = false;
+
+	}
+	
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "Charge") {
 			if (anim.GetCurrentAnimatorStateInfo (0).IsName ("shareBite")) {
-				AudioSource audio = GetComponent<AudioSource> ();
+				audio.clip = chop2;
 				audio.Play ();
 
 
