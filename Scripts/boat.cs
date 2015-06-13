@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class boat : MonoBehaviour {
 
 	public GameObject torpedo;
+	public GameObject dCharge;
 
 	public int difficulty = 1;
 
@@ -14,6 +15,8 @@ public class boat : MonoBehaviour {
 	public GameObject torpedoInstance4;
 	public GameObject torpedoInstance5;
 
+	public GameObject dChargeInstance1;
+
 	public List<GameObject> torpedos;
 
 	public GameObject target1;
@@ -22,15 +25,24 @@ public class boat : MonoBehaviour {
 	public GameObject target4;
 	public GameObject target5;
 
+	public GameObject moveTargetR;
+	public GameObject moveTargetL;
+
 	public bool facingRight = true;
 
 	public bool launched = true;
+	public bool thrown = true;
 
 	public bool inPosition1 = false;
 	public bool inPosition2 = false;
 	public bool inPosition3 = false;
 	public bool inPosition4 = false;
 	public bool inPosition5 = false;
+
+	public bool dInPosition1 = false;
+
+	public bool moveRightB = false;
+	public bool moveLeftB = false;
 
 	// Use this for initialization
 	void Start () {
@@ -39,37 +51,31 @@ public class boat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.P)) {
-
-			spawnRandomTorpedoes();
-			randomizeTargetLocations();
-
-
-			if(!facingRight){
-				if(torpedoInstance1 != null)
-					torpedoInstance1.GetComponent<Transform>().localScale = new Vector3((torpedoInstance1.GetComponent<Transform>().localScale.x) * -1,
-				                                                                   		torpedoInstance1.GetComponent<Transform>().localScale.y,
-				                                                                    	torpedoInstance1.GetComponent<Transform>().localScale.z);
-				if(torpedoInstance2 != null)
-					torpedoInstance2.GetComponent<Transform>().localScale = new Vector3((torpedoInstance2.GetComponent<Transform>().localScale.x) * -1,
-				                                                                    	torpedoInstance2.GetComponent<Transform>().localScale.y,
-				                                                                    	torpedoInstance2.GetComponent<Transform>().localScale.z);
-				if(torpedoInstance3 != null)
-					torpedoInstance3.GetComponent<Transform>().localScale = new Vector3((torpedoInstance3.GetComponent<Transform>().localScale.x) * -1,
-				                                                                    	torpedoInstance3.GetComponent<Transform>().localScale.y,
-				                                                                    	torpedoInstance3.GetComponent<Transform>().localScale.z);
-				if(torpedoInstance4 != null)
-					torpedoInstance4.GetComponent<Transform>().localScale = new Vector3((torpedoInstance4.GetComponent<Transform>().localScale.x) * -1,
-				                                                                    	torpedoInstance4.GetComponent<Transform>().localScale.y,
-				                                                                    	torpedoInstance4.GetComponent<Transform>().localScale.z);
-				if(torpedoInstance5 != null)
-					torpedoInstance5.GetComponent<Transform>().localScale = new Vector3((torpedoInstance5.GetComponent<Transform>().localScale.x) * -1,
-				                                                                    	torpedoInstance5.GetComponent<Transform>().localScale.y,
-				                                                                    	torpedoInstance5.GetComponent<Transform>().localScale.z);
-			}
-
-
-			launched = false;
+			launchTorpedoes();
 		}
+		if (Input.GetKeyDown (KeyCode.O)) {
+			dChargeInstance1 = null;
+			if(facingRight){
+				dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f * Random.Range(.1f, 1f));
+			}else{
+				dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x - 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f * Random.Range(.1f, 1f));
+
+			}
+			dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 1.5f * 1000f);
+		}
+
+		if (Input.GetKeyDown (KeyCode.I)) {
+			moveRightB = true;
+			moveLeftB = false;
+		}
+
+		if (Input.GetKeyDown (KeyCode.U)) {
+			moveRightB = false;
+			moveLeftB = true;
+		}
+
 	}
 
 	void FixedUpdate(){
@@ -78,11 +84,46 @@ public class boat : MonoBehaviour {
 		else
 			facingRight = true;
 
+		handleTorpedoLogic ();
+
+		handleMovement ();
+
+	}
+
+	void moveRight(){
+		GetComponent<Transform> ().localScale = new Vector3 (-1, GetComponent<Transform> ().localScale.y ,GetComponent<Transform> ().localScale.z);
+		if (GetComponent<Transform> ().position != moveTargetR.GetComponent<Transform> ().position)
+			GetComponent<Transform> ().position = Vector3.MoveTowards (GetComponent<Transform> ().position,
+			                                                           moveTargetR.GetComponent<Transform> ().position,
+			                                                           .2f);
+		else
+			moveRightB = false;
+	}
+
+	void moveLeft(){
+		GetComponent<Transform> ().localScale = new Vector3 (1, GetComponent<Transform> ().localScale.y ,GetComponent<Transform> ().localScale.z);
+		if (GetComponent<Transform> ().position != moveTargetL.GetComponent<Transform> ().position)
+			GetComponent<Transform> ().position = Vector3.MoveTowards (GetComponent<Transform> ().position,
+			                                                           moveTargetL.GetComponent<Transform> ().position,
+			                                                           .2f);
+		else
+			moveLeftB = false;
+	}
+
+	void handleMovement(){
+		if (moveRightB)
+			moveRight ();
+		if (moveLeftB)
+			moveLeft ();
+	}
+
+	void handleTorpedoLogic()
+	{
 		if (torpedoInstance1 != null) {
 			if (torpedoInstance1.GetComponent<Transform> ().position != target1.GetComponent<Transform> ().position && launched == false) {
 				torpedoInstance1.GetComponent<Transform> ().position = Vector3.MoveTowards (torpedoInstance1.GetComponent<Transform> ().position,
-			                                                                     target1.GetComponent<Transform> ().position,
-			                                                                     .5f);
+				                                                                            target1.GetComponent<Transform> ().position,
+				                                                                            .5f);
 			} else {
 				inPosition1 = true;
 			}
@@ -92,8 +133,8 @@ public class boat : MonoBehaviour {
 		if (torpedoInstance2 != null) {
 			if (torpedoInstance2.GetComponent<Transform> ().position != target2.GetComponent<Transform> ().position && launched == false) {
 				torpedoInstance2.GetComponent<Transform> ().position = Vector3.MoveTowards (torpedoInstance2.GetComponent<Transform> ().position,
-			                                                                     target2.GetComponent<Transform> ().position,
-			                                                                     .5f);
+				                                                                            target2.GetComponent<Transform> ().position,
+				                                                                            .5f);
 			} else {
 				inPosition2 = true;
 			}
@@ -103,8 +144,8 @@ public class boat : MonoBehaviour {
 		if (torpedoInstance3 != null) {
 			if (torpedoInstance3.GetComponent<Transform> ().position != target3.GetComponent<Transform> ().position && launched == false) {
 				torpedoInstance3.GetComponent<Transform> ().position = Vector3.MoveTowards (torpedoInstance3.GetComponent<Transform> ().position,
-			                                                                     target3.GetComponent<Transform> ().position,
-			                                                                     .5f);
+				                                                                            target3.GetComponent<Transform> ().position,
+				                                                                            .5f);
 			} else {
 				inPosition3 = true;
 			}
@@ -114,8 +155,8 @@ public class boat : MonoBehaviour {
 		if (torpedoInstance4 != null) {
 			if (torpedoInstance4.GetComponent<Transform> ().position != target4.GetComponent<Transform> ().position && launched == false) {
 				torpedoInstance4.GetComponent<Transform> ().position = Vector3.MoveTowards (torpedoInstance4.GetComponent<Transform> ().position,
-			                                                                     target4.GetComponent<Transform> ().position,
-			                                                                     .5f);
+				                                                                            target4.GetComponent<Transform> ().position,
+				                                                                            .5f);
 			} else {
 				inPosition4 = true;
 			}
@@ -133,7 +174,7 @@ public class boat : MonoBehaviour {
 		}else {
 			inPosition5 = true;
 		}
-
+		
 		if (inPosition1 == true && inPosition2 == true && inPosition3 == true && inPosition4 == true && inPosition5 == true && launched == false) {
 			if(facingRight){
 				if(torpedoInstance1 != null)
@@ -159,14 +200,13 @@ public class boat : MonoBehaviour {
 					torpedoInstance5.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f);
 			}
 			launched = true;
-
+			
 		}
 		inPosition1 = false;
 		inPosition2 = false;
 		inPosition3 = false;
 		inPosition4 = false;
 		inPosition5 = false;
-
 	}
 
 	void randomizeTargetLocations()
@@ -186,6 +226,40 @@ public class boat : MonoBehaviour {
 		target5.GetComponent<Transform> ().localPosition = new Vector3 (target5.GetComponent<Transform> ().localPosition.x + Random.Range(-3, 3),
 		                                                                target5.GetComponent<Transform> ().localPosition.y,
 		                                                                target5.GetComponent<Transform> ().localPosition.z);
+
+	}
+
+	void launchTorpedoes()
+	{
+		spawnRandomTorpedoes();
+		randomizeTargetLocations();
+		
+		
+		if(!facingRight){
+			if(torpedoInstance1 != null)
+				torpedoInstance1.GetComponent<Transform>().localScale = new Vector3((torpedoInstance1.GetComponent<Transform>().localScale.x) * -1,
+				                                                                    torpedoInstance1.GetComponent<Transform>().localScale.y,
+				                                                                    torpedoInstance1.GetComponent<Transform>().localScale.z);
+			if(torpedoInstance2 != null)
+				torpedoInstance2.GetComponent<Transform>().localScale = new Vector3((torpedoInstance2.GetComponent<Transform>().localScale.x) * -1,
+				                                                                    torpedoInstance2.GetComponent<Transform>().localScale.y,
+				                                                                    torpedoInstance2.GetComponent<Transform>().localScale.z);
+			if(torpedoInstance3 != null)
+				torpedoInstance3.GetComponent<Transform>().localScale = new Vector3((torpedoInstance3.GetComponent<Transform>().localScale.x) * -1,
+				                                                                    torpedoInstance3.GetComponent<Transform>().localScale.y,
+				                                                                    torpedoInstance3.GetComponent<Transform>().localScale.z);
+			if(torpedoInstance4 != null)
+				torpedoInstance4.GetComponent<Transform>().localScale = new Vector3((torpedoInstance4.GetComponent<Transform>().localScale.x) * -1,
+				                                                                    torpedoInstance4.GetComponent<Transform>().localScale.y,
+				                                                                    torpedoInstance4.GetComponent<Transform>().localScale.z);
+			if(torpedoInstance5 != null)
+				torpedoInstance5.GetComponent<Transform>().localScale = new Vector3((torpedoInstance5.GetComponent<Transform>().localScale.x) * -1,
+				                                                                    torpedoInstance5.GetComponent<Transform>().localScale.y,
+				                                                                    torpedoInstance5.GetComponent<Transform>().localScale.z);
+		}
+		
+		
+		launched = false;
 
 	}
 
