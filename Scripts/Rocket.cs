@@ -9,15 +9,15 @@ public class Rocket : MonoBehaviour
 	void Start () 
 	{
 		// Destroy the rocket after 2 seconds if it doesn't get destroyed before then.
-		Destroy(gameObject, 30);
+		Destroy(gameObject, 4);
 		//GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.P)) {
-			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
-		}
+//		if (Input.GetKeyDown (KeyCode.P)) {
+//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
+//		}
 	}
 
 
@@ -57,7 +57,7 @@ public class Rocket : MonoBehaviour
 			Destroy (gameObject);
 		}
 		// Otherwise if the player manages to shoot himself...
-		else if(col.gameObject.tag != "Player")
+		else if(col.gameObject.tag != "Bullet")
 		{
 			// Instantiate the explosion and destroy the rocket.
 			OnExplode();
