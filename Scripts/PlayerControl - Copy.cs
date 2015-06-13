@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControlCopy : MonoBehaviour
 {
 	[HideInInspector]
 	public bool facingRight = true;			// For determining which way the player is currently facing.
@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
 
-//	public float h;
+	public float h;
 
 
 	void Awake()
@@ -36,7 +36,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Start()
 	{
-		GetComponent<Rigidbody2D> ().AddForce (Vector2.right * maxSpeed * moveForce);
+		GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1 * moveForce);
 	}
 
 
@@ -49,57 +49,57 @@ public class PlayerControl : MonoBehaviour
 //		if(Input.GetButtonDown("Jump") && grounded)
 //			jump = true;
 
-//		if (Input.GetKey (KeyCode.A)) {
-//			h = -1f;
-//		} else if (Input.GetKey (KeyCode.D)) {
-//			h = 1f;
-//		} else {
-//			h = 0f;
-//		}
+		if (Input.GetKey (KeyCode.A)) {
+			h = -1f;
+		} else if (Input.GetKey (KeyCode.D)) {
+			h = 1f;
+		} else {
+			h = 0f;
+		}
 
-//		if (Input.GetKeyDown (KeyCode.Space)){
-//			// ... flip the player.
-//			Flip();
-//			GetComponent<Rigidbody2D>().velocity = new Vector2((GetComponent<Rigidbody2D>().velocity.x) * -1 , GetComponent<Rigidbody2D>().velocity.y);
-//		}
+		if (Input.GetKeyDown (KeyCode.Space)){
+			// ... flip the player.
+			Flip();
+			GetComponent<Rigidbody2D>().velocity = new Vector2((GetComponent<Rigidbody2D>().velocity.x) * -1 , GetComponent<Rigidbody2D>().velocity.y);
+		}
 	}
 
 
 	void FixedUpdate ()
 	{
 		// Cache the horizontal input.
-		float h = Input.GetAxis("Horizontal");
+		//float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis ("Vertical");
-		float vOff = 1f;
+		float vOff = .25f;
 
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-//		if (h * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
-//			// ... add a force to the player.
-//		if (facingRight && h > 0) {
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		} else if (!facingRight && h < 0) {
-//			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		}
-//		else if(h != 0)
-//			GetComponent<Rigidbody2D> ().drag = 5 * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x * .1f);
-//		else {
-//			GetComponent<Rigidbody2D> ().drag = 0;
-//		}
+		if (h * GetComponent<Rigidbody2D> ().velocity.x < maxSpeed)
+			// ... add a force to the player.
+		if (facingRight && h > 0) {
+			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
+			GetComponent<Rigidbody2D> ().drag = 0;
+		} else if (!facingRight && h < 0) {
+			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * h * moveForce);
+			GetComponent<Rigidbody2D> ().drag = 0;
+		}
+		else if(h != 0)
+			GetComponent<Rigidbody2D> ().drag = 5 * Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x * .1f);
+		else {
+			GetComponent<Rigidbody2D> ().drag = 0;
+		}
 			
 					
 
 		// If the player's horizontal velocity is greater than the maxSpeed...
-//		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
-//			// ... set the player's velocity to the maxSpeed in the x axis.
-//			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
-//
-//		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-		if(v * GetComponent<Rigidbody2D>().velocity.y < maxSpeedy)
+		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
+			// ... set the player's velocity to the maxSpeed in the x axis.
+			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+
+		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
+		if(v * GetComponent<Rigidbody2D>().velocity.y < maxSpeed)
 			// ... add a force to the player.
 			GetComponent<Rigidbody2D>().AddForce(Vector2.up * v * moveForce * vOff);
 		
@@ -109,16 +109,12 @@ public class PlayerControl : MonoBehaviour
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x , Mathf.Sign(GetComponent<Rigidbody2D>().velocity.y) * maxSpeedy);
 
 		// If the input is moving the player right and the player is facing left...
-		if (h > 0 && !facingRight) {
-			Flip ();
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 ((GetComponent<Rigidbody2D> ().velocity.x) * -1, GetComponent<Rigidbody2D> ().velocity.y);
-		}
+		//if(h > 0 && !facingRight)
 
 //		// Otherwise if the input is moving the player left and the player is facing right...
-		else if (h < 0 && facingRight) {
-			Flip ();
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 ((GetComponent<Rigidbody2D> ().velocity.x) * -1, GetComponent<Rigidbody2D> ().velocity.y);
-		}
+//		else if(h < 0 && facingRight)
+//			// ... flip the player.
+//			Flip();
 
 //		// If the player should jump...
 //		if(jump)
