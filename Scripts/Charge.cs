@@ -7,12 +7,13 @@ public class Charge : MonoBehaviour
 	public GameObject countSprite;
 	public Animator anim;
 
+	public int timeLeft;
+	public bool exploded = false;
 
-	void Start () 
+	void Awake()
 	{
-		// Destroy the rocket after 2 seconds if it doesn't get destroyed before then.
 		anim = countSprite.GetComponent<Animator> ();
-		int timeLeft = Random.Range (3, 9);
+		timeLeft = Random.Range (3, 9);
 		switch (timeLeft) {
 		case 9:
 			anim.Play("countdown");
@@ -36,8 +37,15 @@ public class Charge : MonoBehaviour
 			anim.Play ("count3");
 			break;
 		}
-		Destroy(gameObject, timeLeft);
+	}
+
+	void Start () 
+	{
+		// Destroy the rocket after 2 seconds if it doesn't get destroyed before then.
+
+		//Destroy(gameObject, timeLeft + 1);
 		StartCoroutine(MyCoroutine());
+		StartCoroutine(MyCoroutine2());
 		//GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
 	}
 
@@ -46,7 +54,25 @@ public class Charge : MonoBehaviour
 //		if (Input.GetKeyDown (KeyCode.P)) {
 //			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
 //		}
+		if (anim.GetCurrentAnimatorStateInfo (0).IsName ("explode")) {
+			if(!exploded){
 
+				exploded = true;
+				OnExplode();
+
+				Destroy(gameObject);
+			}
+		}
+
+	}
+
+	IEnumerator MyCoroutine2()
+	{
+		while (timeLeft >= 0) {
+			//Debug.Log(timeLeft);
+			yield return new WaitForSeconds (1);
+			timeLeft--;
+		}
 	}
 
 	IEnumerator MyCoroutine()

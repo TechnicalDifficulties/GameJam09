@@ -44,26 +44,23 @@ public class boat : MonoBehaviour {
 	public bool moveRightB = false;
 	public bool moveLeftB = false;
 
+	public GameObject duckSprite;
+	public Animator duckanim;
+
 	// Use this for initialization
 	void Start () {
+		duckanim = duckSprite.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.P)) {
+			duckanim.SetTrigger("Launch");
 			launchTorpedoes();
 		}
 		if (Input.GetKeyDown (KeyCode.O)) {
-			dChargeInstance1 = null;
-			if(facingRight){
-				dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
-				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f * Random.Range(.1f, 1f));
-			}else{
-				dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x - 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
-				dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f * Random.Range(.1f, 1f));
+			duckanim.SetTrigger("Throw");
 
-			}
-			dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 1.5f * 1000f);
 		}
 
 		if (Input.GetKeyDown (KeyCode.I)) {
@@ -80,6 +77,21 @@ public class boat : MonoBehaviour {
 
 
 	}
+
+	public void throwCharge()
+	{
+		dChargeInstance1 = null;
+		if(facingRight){
+			dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x + 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+			dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f * Random.Range(.1f, 1f));
+		}else{
+			dChargeInstance1 = Instantiate (dCharge, new Vector3(transform.position.x - 6, transform.position.y ,transform.position.z), Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+			dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f * Random.Range(.1f, 1f));
+			
+		}
+		dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 1.5f * 1000f);
+	}
+
 
 	void FixedUpdate(){
 		if (GetComponent<Transform> ().localScale.x < 0)
@@ -203,6 +215,8 @@ public class boat : MonoBehaviour {
 					torpedoInstance5.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f);
 			}
 			launched = true;
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.Play();
 			
 		}
 		inPosition1 = false;
