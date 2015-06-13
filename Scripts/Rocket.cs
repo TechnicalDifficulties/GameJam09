@@ -9,7 +9,15 @@ public class Rocket : MonoBehaviour
 	void Start () 
 	{
 		// Destroy the rocket after 2 seconds if it doesn't get destroyed before then.
-		Destroy(gameObject, 2);
+		Destroy(gameObject, 30);
+		//GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown (KeyCode.P)) {
+			GetComponent<Rigidbody2D> ().AddForce (Vector2.right * 1.5f * 1000f);
+		}
 	}
 
 
@@ -25,10 +33,10 @@ public class Rocket : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D col) 
 	{
 		// If it hits an enemy...
-		if(col.tag == "Enemy")
+		if(col.tag == "Player")
 		{
 			// ... find the Enemy script and call the Hurt function.
-			col.gameObject.GetComponent<Enemy>().Hurt();
+			//col.gameObject.GetComponent<Enemy>().Hurt();
 
 			// Call the explosion instantiation.
 			OnExplode();
