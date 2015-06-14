@@ -90,7 +90,7 @@ public class Charge : MonoBehaviour
 		yield return new WaitForSeconds (.5f);
 		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .3f);
 		AudioSource audio = GetComponent<AudioSource> ();
-		audio.Play ();
+		audio.Play ();	
 	}
 
 	void OnExplode()
