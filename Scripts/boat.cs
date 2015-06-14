@@ -8,7 +8,7 @@ public class boat : MonoBehaviour {
 	public GameObject dCharge;
 	public GameObject mine;
 
-	public int difficulty = 1;
+	public int difficulty = 3;
 
 	public GameObject torpedoInstance1;
 	public GameObject torpedoInstance2;
@@ -57,6 +57,12 @@ public class boat : MonoBehaviour {
 
 	public bool flickering = false;
 
+	public AudioClip track1;
+	public AudioClip track2;
+	public AudioClip track3;
+
+	public AudioSource audio;
+
 	public Vector3 baseLocalPosition1;
 	public Vector3 baseLocalPosition2;
 	public Vector3 baseLocalPosition3;
@@ -64,6 +70,12 @@ public class boat : MonoBehaviour {
 	public Vector3 baseLocalPosition5;
 
 	public int damage = 0;
+
+	public int health = 100;
+
+	void Awake(){
+		audio = GetComponent<AudioSource>();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -91,6 +103,16 @@ public class boat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (health <= 50 && health >= 25)
+			difficulty = 2;
+
+		if (health < 25)
+			difficulty = 1;
+
+
+		if (health <= 0)
+			Destroy (gameObject);
+
 		if(gotHit)
 		{
 			if(!flickering){
@@ -99,44 +121,44 @@ public class boat : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.P)) {
-			duckanim.SetTrigger("Launch");
-			StartCoroutine(shootXTorpedos(3));
-			//launchTorpedoes();
-		}
-		if (Input.GetKeyDown (KeyCode.O)) {
-			duckanim.SetTrigger("Throw");
-		}
-		if (Input.GetKeyDown (KeyCode.L)) {
-			StartCoroutine(throwXMines(3));
-			//duckanim.SetTrigger("ThrowMine");
-		}
-
-		if (Input.GetKeyDown (KeyCode.I)) {
-
-			StartCoroutine(throwXCharges(6));
-			moveRightB = true;
-			moveLeftB = false;
-		}
-
-		if (Input.GetKeyDown (KeyCode.U)) {
-
-			StartCoroutine(throwXCharges(6));
-			moveRightB = false;
-			moveLeftB = true;
-
-		}
+//		if (Input.GetKeyDown (KeyCode.P)) {
+//			duckanim.SetTrigger("Launch");
+//			StartCoroutine(shootXTorpedos(3));
+//			//launchTorpedoes();
+//		}
+//		if (Input.GetKeyDown (KeyCode.O)) {
+//			duckanim.SetTrigger("Throw");
+//		}
+//		if (Input.GetKeyDown (KeyCode.L)) {
+//			StartCoroutine(throwXMines(3));
+//			//duckanim.SetTrigger("ThrowMine");
+//		}
+//
+//		if (Input.GetKeyDown (KeyCode.I)) {
+//
+//			StartCoroutine(throwXCharges(6));
+//			moveRightB = true;
+//			moveLeftB = false;
+//		}
+//
+//		if (Input.GetKeyDown (KeyCode.U)) {
+//
+//			StartCoroutine(throwXCharges(6));
+//			moveRightB = false;
+//			moveLeftB = true;
+//
+//		}
 
 		if (ready) {
 			ready = false;
 			int choice = (Random.Range(0,3));
 			switch(choice){
 			case 0:
-				StartCoroutine(throwXMines(3));
+				StartCoroutine(throwXMines(6 - difficulty));
 				break;
 			case 1:
 				if(wentLeft){
-					StartCoroutine(throwXCharges(6));
+					StartCoroutine(throwXCharges(8 - difficulty));
 					moveRightB = true;
 					moveLeftB = false;
 				}
@@ -149,7 +171,7 @@ public class boat : MonoBehaviour {
 				break;
 			case 2:
 				duckanim.SetTrigger("Launch");
-				StartCoroutine(shootXTorpedos(3));
+				StartCoroutine(shootXTorpedos(6 - difficulty));
 				break;
 			}
 		}
@@ -167,6 +189,10 @@ public class boat : MonoBehaviour {
 	IEnumerator handleDamage(){
 		gotHit = true;
 		damage++;
+		duckanim.SetTrigger ("Hurt");
+		health = health - 10;
+		audio.clip = track3;
+		audio.Play();
 		GetComponent<BoxCollider2D> ().enabled = false;
 		yield return new WaitForSeconds(3);
 		GetComponent<BoxCollider2D> ().enabled = true;
@@ -356,7 +382,7 @@ public class boat : MonoBehaviour {
 					torpedoInstance5.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f);
 			}
 			launched = true;
-			AudioSource audio = GetComponent<AudioSource>();
+			audio.clip = track1;
 			audio.Play();
 			
 		}

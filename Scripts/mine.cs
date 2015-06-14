@@ -4,21 +4,27 @@ using System.Collections;
 public class mine : MonoBehaviour {
 	float rot;
 	public GameObject explosion;
+	public GameObject splash;	
 	public float sinkTime;
 	public float rDir;
+	public bool tutorialMine = false;
 
 	// Use this for initialization
 	void Start () {
+		if (!tutorialMine) {
+			//GetComponent<Rigidbody2D> ().gravityScale = .1f;
+			sinkTime = Random.Range (2f, 4f);
 
-		//GetComponent<Rigidbody2D> ().gravityScale = .1f;
-		sinkTime = Random.Range (2f, 4f);
+
+			StartCoroutine (MyCoroutine ());
+			StartCoroutine (MyCoroutine2 ());
+		}
 		if (Random.Range (0, 2) == 1)
 			rDir = -.1f;
 		else
 			rDir = .1f;
+
 		rot = transform.rotation.z;
-		StartCoroutine(MyCoroutine());
-		StartCoroutine(MyCoroutine2());
 	}
 	
 	// Update is called once per frame
@@ -29,8 +35,11 @@ public class mine : MonoBehaviour {
 
 	IEnumerator MyCoroutine()
 	{
-		yield return new WaitForSeconds (.5f);
+		yield return new WaitForSeconds (.7f);
 		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .5f);
+		AudioSource audio = GetComponent<AudioSource> ();
+		audio.Play ();
+		OnSplash ();
 	}
 
 	IEnumerator MyCoroutine2()
@@ -38,11 +47,21 @@ public class mine : MonoBehaviour {
 		yield return new WaitForSeconds (sinkTime);
 		GetComponent<Rigidbody2D> ().gravityScale = 0;
 		GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+
 	}
 
 	void OnTriggerEnter2D (Collider2D col) 
 	{
 		OnExplode ();
+	}
+
+	void OnSplash()
+	{
+		// Create a quaternion with a random rotation in the z-axis.
+		//Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+		
+		// Instantiate the explosion where the rocket is with the random rotation.
+		Instantiate(splash, transform.position, Quaternion.Euler (new Vector3 (0, 0, 0)));
 	}
 
 	void OnExplode()

@@ -1,9 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6215f64c6c0008541a0012087a068dba
 timeCreated: 1434234830
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
+=======
+guid: 0387559303a2f2d41ba5d29e717f5337
+timeCreated: 1434254815
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sheet-UI1_0
+    21300002: Sheet-UI1_1
+>>>>>>> 1628a1eb5e4dc533dd84358588fdabcfc76295f5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -37,18 +47,50 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+<<<<<<< HEAD
   spriteMode: 1
+=======
+  spriteMode: 2
+>>>>>>> 1628a1eb5e4dc533dd84358588fdabcfc76295f5
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+<<<<<<< HEAD
   spritePixelsToUnits: 100
+=======
+  spritePixelsToUnits: 50
+>>>>>>> 1628a1eb5e4dc533dd84358588fdabcfc76295f5
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+<<<<<<< HEAD
     sprites: []
+=======
+    sprites:
+    - name: Sheet-UI1_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 238
+        width: 1135
+        height: 225
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-UI1_1
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 1
+        width: 1116
+        height: 257
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+>>>>>>> 1628a1eb5e4dc533dd84358588fdabcfc76295f5
   spritePackingTag: 
   userData: 
   assetBundleName: 

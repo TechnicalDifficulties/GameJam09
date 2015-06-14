@@ -61,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.1035767, y: -9.00240517, z: 0}
+  m_LocalPosition: {x: -13.5647421, y: -12.0161724, z: 0}
   m_LocalScale: {x: 10, y: 3, z: 2}
   m_Children:
   - {fileID: 475258}
@@ -198,7 +198,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0511de605bcb26e4abc0526c94b248cd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6955d13bf32414cc2810dca8756e1822, type: 3}
   m_PlayOnAwake: 0
   m_Volume: .5
   m_Pitch: 1
@@ -287,10 +287,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: 42404bf7d14c342f69690c9961a7530d, type: 2}
+  splash: {fileID: 129836, guid: c24e8f64a163afc4296649111493742b, type: 2}
   countSprite: {fileID: 195848}
   anim: {fileID: 0}
   timeLeft: 0
   exploded: 0
+  tutorial: 0
 --- !u!114 &11466424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,6 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7478ff898ebd7da42986aa967a2f5913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  track1: {fileID: 0}
+  track2: {fileID: 0}
   boat: {fileID: 0}
 --- !u!212 &21230836
 SpriteRenderer:
