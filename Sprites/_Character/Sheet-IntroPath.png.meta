@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: f4f0ebbc1a858a04896cc067d6cacd5c
-timeCreated: 1434251941
+guid: 40b1419d2f9c4d64bbd3a2b8c0738ab4
+timeCreated: 1434261564
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Sheet-IntroPath_0
+    21300002: Sheet-IntroPath_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +50,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Sheet-IntroPath_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+        width: 2822
+        height: 5106
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-IntroPath_1
+      rect:
+        serializedVersion: 2
+        x: 2837
+        y: 1081
+        width: 4452
+        height: 4032
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
