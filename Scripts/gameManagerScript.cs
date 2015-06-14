@@ -14,13 +14,17 @@ public class gameManagerScript : MonoBehaviour {
 	public GameObject fish;
 	public GameObject fishInstance1;
 
+	public bool tutorial = false;
+
 	public musicManagerScript mMscript;
 
 	// Use this for initialization
 	void Start () {
 		mMscript = musicManager.GetComponent<musicManagerScript> ();
 		mMscript.changeTrack (mMscript.track1);
-		StartCoroutine(repeatSummoning());
+
+		if (!tutorial)
+			StartCoroutine(repeatSummoning());
 
 	}
 	
