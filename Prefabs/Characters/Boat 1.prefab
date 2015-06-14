@@ -96,7 +96,7 @@ GameObject:
   - 212: {fileID: 21215230}
   m_Layer: 18
   m_Name: Boat 1
-  m_TagString: Untagged
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75921caf527b1f74d9abce52afe1e477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   torpedo: {fileID: 117438, guid: fc52d6e6f63fc0a49aa4001ac0778da5, type: 2}
   dCharge: {fileID: 187790, guid: f33f0a61d61419147943db2d141a0306, type: 2}
   mine: {fileID: 181762, guid: e15e7042acf4eb74b9d6e6804af1af97, type: 2}
@@ -563,7 +564,8 @@ MonoBehaviour:
   damage: 0
   health: 100
   player: {fileID: 0}
-  wavesSprite: {fileID: 0}
+  wavesSprite: {fileID: 141220}
+  duckHud: {fileID: 0}
 --- !u!212 &21211208
 SpriteRenderer:
   m_ObjectHideFlags: 1

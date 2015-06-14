@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
-
+	public GameObject GameManager;
 	public GameObject MusicManager;
 
 	[HideInInspector]
@@ -99,6 +99,14 @@ public class PlayerControl : MonoBehaviour
 
 	void Update()
 	{
+		if (GameManager == null) {
+			GameManager = GameObject.FindGameObjectWithTag("GameManager");
+		}
+
+		if (MusicManager == null) {
+			MusicManager = GameObject.FindGameObjectWithTag("MusicManager");
+		}
+
 		if (health > 100)
 			health = 100;
 
@@ -110,8 +118,8 @@ public class PlayerControl : MonoBehaviour
 			if(!dead)
 				anim.Play("sharkDie");
 			dead = true;
-			MusicManager.GetComponent<musicManagerScript>().source1.GetComponent<audioSourceScript>().targetPitch = 0f;
-			MusicManager.GetComponent<musicManagerScript>().source2.GetComponent<audioSourceScript>().targetPitch = 0f;
+			//MusicManager.GetComponent<musicManagerScript>().source1.
+			//MusicManager.GetComponent<musicManagerScript>().source2.GetComponent<audioSourceScript>().targetPitch = 0f;
 
 			GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 			GetComponent<Rigidbody2D>().isKinematic = true;
@@ -143,6 +151,7 @@ public class PlayerControl : MonoBehaviour
 						
 						}
 						dChargeInstance1.GetComponent<Rigidbody2D> ().AddForce (Vector2.up * GetComponent<Rigidbody2D> ().velocity.y * 100f * 3);
+						dChargeInstance1.GetComponent<Charge> ().spat = true;
 				
 
 
@@ -381,6 +390,18 @@ public class PlayerControl : MonoBehaviour
 			if (col.tag == "Spikes") {
 				spikeZone = true;
 			}
+
+			if (col.tag == "CaveTrigger") {
+				//Debug.Log("Goto Tutorial 2");
+				Application.LoadLevel(2);
+			}
+
+			if (col.tag == "CaveTrigger2") {
+				//Debug.Log("Boss Fight");
+				MusicManager.GetComponent<musicManagerScript>().playBossMusic();
+				GameManager.GetComponent<gameManagerScript>().tutorial = false;
+				Application.LoadLevel(3);
+			}
 		}
 	}
 
@@ -400,11 +421,11 @@ public class PlayerControl : MonoBehaviour
 				health = health - dmg;
 			audio.clip = hurt;
 			audio.Play ();
-			if (!spikeZone) {
+			if (!tutorial) {
 				GetComponent<CircleCollider2D> ().enabled = false;
 			}
 			yield return new WaitForSeconds (3);
-			if (!spikeZone) {
+			if (!tutorial) {
 				GetComponent<CircleCollider2D> ().enabled = true;
 			}
 

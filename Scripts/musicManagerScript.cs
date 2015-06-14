@@ -13,14 +13,21 @@ public class musicManagerScript : MonoBehaviour {
 	public bool swap = false;
 	public float fadeSpeed = 0.25f;
 
+	void Awake(){
+		DontDestroyOnLoad(transform.gameObject);
+		source1 = GetComponent<AudioSource> ();
+	}
+
 	// Use this for initialization
 	void Start () {
+		source1.clip = track1;
+		source1.Play ();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		updateVolume ();
+		//updateVolume ();
 	}
 
 	void updateVolume(){
@@ -45,14 +52,20 @@ public class musicManagerScript : MonoBehaviour {
 			swap = true;
 	}
 
+	public void playBossMusic(){
+		source1.clip = track2;
+		source1.Play ();
+		source1.loop = true;
+	}
+
 	public void changeTrack(AudioClip clip){
 		if (swap){
 			loadSource(source1, clip);
 			playSource(source1);
 		}
 		else{
-			loadSource(source2, clip);
-			playSource(source2);
+			//loadSource(source2, clip);
+			//playSource(source2);
 		}
 		toggleMusic ();
 	}

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class boat : MonoBehaviour {
 
+	public GameObject gameManager;
+
 	public GameObject torpedo;
 	public GameObject dCharge;
 	public GameObject mine;
@@ -121,6 +123,13 @@ public class boat : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if (gameManager == null) {
+			gameManager = GameObject.FindGameObjectWithTag("GameManager");
+			gameManager.GetComponent<gameManagerScript>().boat = this.gameObject;
+			gameManager.GetComponent<gameManagerScript>().tutorial = false;
+			gameManager.GetComponent<gameManagerScript>().startRepeatSummoning();
+		}
 
 		if (health <= 70 && health >= 40)
 			difficulty = 2;

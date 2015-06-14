@@ -14,14 +14,18 @@ public class gameManagerScript : MonoBehaviour {
 	public GameObject fish;
 	public GameObject fishInstance1;
 
-	public bool tutorial = false;
+	public bool tutorial = true;
 
 	public musicManagerScript mMscript;
+
+	void Awake(){
+		DontDestroyOnLoad(transform.gameObject);
+	}
 
 	// Use this for initialization
 	void Start () {
 		mMscript = musicManager.GetComponent<musicManagerScript> ();
-		mMscript.changeTrack (mMscript.track1);
+		//mMscript.changeTrack (mMscript.track1);
 
 		if (!tutorial)
 			StartCoroutine(repeatSummoning());
@@ -30,13 +34,28 @@ public class gameManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (player == null) {
+			player = GameObject.FindGameObjectWithTag("Player");
+		}
+
+		if (!tutorial) {
+			if(boat == null)
+			{
+				boat = GameObject.FindGameObjectWithTag("Boat");
+			}
+		}
 //		InvokeRepeating("summonSchool", 30, 1f);
 //		if (Input.GetKeyDown (KeyCode.F)) {
 //			summonSchool(30, );
 //		}
 	}
 
-	IEnumerator repeatSummoning()
+	public void startRepeatSummoning()
+	{
+		StartCoroutine(repeatSummoning());
+	}
+
+	public IEnumerator repeatSummoning()
 	{
 		while(true)
 		{
@@ -45,6 +64,8 @@ public class gameManagerScript : MonoBehaviour {
 			summonSchool();
 		}
 	}
+
+
 
 	void summonSchool()
 	{

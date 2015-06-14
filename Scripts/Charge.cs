@@ -13,6 +13,7 @@ public class Charge : MonoBehaviour
 
 	public bool tutorial = false;
 	public bool spat = false;
+	public bool sank = true;
 
 	void Awake()
 	{
@@ -86,11 +87,25 @@ public class Charge : MonoBehaviour
 
 	}
 
+	void FixedUpdate(){
+		if (!tutorial) {
+			if(transform.position.y >= 3  && sank)
+			{
+				GetComponent<Rigidbody2D> ().gravityScale = 3f;
+			}
+			else{
+				GetComponent<Rigidbody2D> ().gravityScale = Random.Range (.1f, .3f);
+			}
+		}
+	}
+
 	IEnumerator MyCoroutine2()
 	{
 		while (timeLeft >= 0) {
 			//Debug.Log(timeLeft);
 			yield return new WaitForSeconds (1);
+			sank = true;
+
 			timeLeft--;
 		}
 	}
@@ -99,11 +114,13 @@ public class Charge : MonoBehaviour
 	{
 		yield return new WaitForSeconds (.65f);
 		if (!spat) {
+
 			GetComponent<Rigidbody2D> ().gravityScale = Random.Range (.1f, .3f);
 			AudioSource audio = GetComponent<AudioSource> ();
 			audio.Play ();	
 			OnSplash ();
 		}
+
 	}
 
 	void OnSplash()
