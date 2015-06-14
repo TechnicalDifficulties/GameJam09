@@ -48,6 +48,8 @@ public class PlayerControl : MonoBehaviour
 	public int damage = 0;
 	public int health = 100;
 
+	public bool tutorial;
+
 	AudioSource audio;
 	void Awake()
 	{
@@ -278,26 +280,27 @@ public class PlayerControl : MonoBehaviour
 //		rot = Mathf.Round((transform.rotation.z + zTarget) / 3);
 //		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
 
-
-		if (transform.position.y > 4.3f) {
-			transform.position = new Vector3 (transform.position.x, 4.3f, transform.position.z);
-			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
-		}
+		if (!tutorial) {
+			if (transform.position.y > 4.3f) {
+				transform.position = new Vector3 (transform.position.x, 4.3f, transform.position.z);
+				GetComponent<Rigidbody2D> ().velocity = new Vector2 (GetComponent<Rigidbody2D> ().velocity.x, 0);
+			}
 
 		
-		if (transform.position.y < -14.2f) {
-			transform.position = new Vector3 (transform.position.x, -14.2f, transform.position.z);
-			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
-		}
+			if (transform.position.y < -14.2f) {
+				transform.position = new Vector3 (transform.position.x, -14.2f, transform.position.z);
+				GetComponent<Rigidbody2D> ().velocity = new Vector2 (GetComponent<Rigidbody2D> ().velocity.x, 0);
+			}
 
-		if (transform.position.x > 34f) {
-			transform.position = new Vector3 (34f,transform.position.y, transform.position.z);
-			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
-		}
+			if (transform.position.x > 34f) {
+				transform.position = new Vector3 (34f, transform.position.y, transform.position.z);
+				GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, GetComponent<Rigidbody2D> ().velocity.y);
+			}
 
-		if (transform.position.x < -25f) {
-			transform.position = new Vector3 (-25f,transform.position.y, transform.position.z);
-			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+			if (transform.position.x < -25f) {
+				transform.position = new Vector3 (-25f, transform.position.y, transform.position.z);
+				GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, GetComponent<Rigidbody2D> ().velocity.y);
+			}
 		}
 	}
 
