@@ -1,9 +1,30 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: c9c61b4d257d6e04fb5b43f08c9e6cdf
 timeCreated: 1434273253
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
+=======
+guid: 8c914fec7d0a0d74fa0b160705692bd2
+timeCreated: 1434274918
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sheet-SharkDeath_0
+    21300002: Sheet-SharkDeath_1
+    21300004: Sheet-SharkDeath_2
+    21300006: Sheet-SharkDeath_3
+    21300008: Sheet-SharkDeath_4
+    21300010: Sheet-SharkDeath_5
+    21300012: Sheet-SharkDeath_6
+    21300014: Sheet-SharkDeath_7
+    21300016: Sheet-SharkDeath_8
+    21300018: Sheet-SharkDeath_9
+    21300020: Sheet-SharkDeath_10
+    21300022: Sheet-SharkDeath_11
+    21300024: Sheet-SharkDeath_12
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +51,22 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
+<<<<<<< HEAD
     aniso: -1
+=======
+    aniso: 16
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+<<<<<<< HEAD
   spriteMode: 1
+=======
+  spriteMode: 2
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +77,141 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+<<<<<<< HEAD
     sprites: []
+=======
+    sprites:
+    - name: Sheet-SharkDeath_0
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 7552
+        width: 1274
+        height: 1132
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_1
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 6216
+        width: 1153
+        height: 1238
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_2
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 4805
+        width: 1078
+        height: 1202
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_3
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 3397
+        width: 1202
+        height: 1230
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_4
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 2075
+        width: 1431
+        height: 1217
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_5
+      rect:
+        serializedVersion: 2
+        x: 2878
+        y: 7912
+        width: 1465
+        height: 949
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_6
+      rect:
+        serializedVersion: 2
+        x: 2878
+        y: 6811
+        width: 1465
+        height: 888
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_7
+      rect:
+        serializedVersion: 2
+        x: 2878
+        y: 5640
+        width: 1465
+        height: 971
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_8
+      rect:
+        serializedVersion: 2
+        x: 2852
+        y: 4419
+        width: 1544
+        height: 1140
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_9
+      rect:
+        serializedVersion: 2
+        x: 2417
+        y: 2903
+        width: 2174
+        height: 1449
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 95, z: 0, w: 0}
+    - name: Sheet-SharkDeath_10
+      rect:
+        serializedVersion: 2
+        x: 2221
+        y: 1494
+        width: 2477
+        height: 1456
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_11
+      rect:
+        serializedVersion: 2
+        x: 2195
+        y: 42
+        width: 2573
+        height: 1372
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-SharkDeath_12
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 127
+        width: 1629
+        height: 665
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
   spritePackingTag: 
   userData: 
   assetBundleName: 

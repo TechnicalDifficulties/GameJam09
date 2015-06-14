@@ -61,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.1255436, y: 15.9741526, z: 0}
+  m_LocalPosition: {x: -13.5647421, y: -12.0161724, z: 0}
   m_LocalScale: {x: 10, y: 3, z: 2}
   m_Children:
   - {fileID: 475258}
@@ -287,10 +287,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: 42404bf7d14c342f69690c9961a7530d, type: 2}
+  splash: {fileID: 129836, guid: c24e8f64a163afc4296649111493742b, type: 2}
   countSprite: {fileID: 195848}
   anim: {fileID: 0}
   timeLeft: 0
   exploded: 0
+  tutorial: 0
 --- !u!114 &11466424
 MonoBehaviour:
   m_ObjectHideFlags: 1

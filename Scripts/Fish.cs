@@ -9,6 +9,8 @@ public class Fish : MonoBehaviour {
 	public Sprite fish4;
 	public Sprite fish5;
 
+	public bool tutorial = false;
+
 	public GameObject sprite;
 
 	public float speed = 3;
@@ -25,7 +27,8 @@ public class Fish : MonoBehaviour {
 		getRandomFish ();
 		getRandomColor ();
 		speed = Random.Range (5, 8);
-		Destroy(gameObject, 20);
+		if(!tutorial)
+			Destroy(gameObject, 20);
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -34,6 +37,11 @@ public class Fish : MonoBehaviour {
 			if (col.gameObject.GetComponent<PlayerControl> ().anim.GetCurrentAnimatorStateInfo (0).IsName ("shareBite")) {
 				col.gameObject.GetComponent<PlayerControl> ().ateFish ();
 				Destroy (gameObject);
+			}
+		}
+		if(col.gameObject.tag == "Surface"){
+			if (tutorial) {
+				facingRight = !facingRight;
 			}
 		}
 	}
@@ -47,13 +55,15 @@ public class Fish : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		if (facingRight) {
 			transform.position = new Vector3 (transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
-			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			transform.localScale = new Vector3 (Mathf.Abs (transform.localScale.x), transform.localScale.y, transform.localScale.z);
 		} else {
 			transform.position = new Vector3 (transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
-			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
+			transform.localScale = new Vector3 (Mathf.Abs (transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
 		}
+	
 	}
 
 	void getRandomFish()

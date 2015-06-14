@@ -1,9 +1,24 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d44826487f12f5d4ea3cf25d97648fa9
 timeCreated: 1434273263
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
+=======
+guid: 006bc08c1fdce2e4c809eeb96cd254c0
+timeCreated: 1434266250
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sheet-Intro-Background_0
+    21300002: Sheet-Intro-Background_1
+    21300004: Sheet-Intro-Background_2
+    21300006: Sheet-Intro-Background_3
+    21300008: Sheet-Intro-Background_4
+    21300010: Sheet-Intro-Background_5
+    21300012: Sheet-Intro-Background_6
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +45,22 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
+<<<<<<< HEAD
     aniso: -1
+=======
+    aniso: 16
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+<<<<<<< HEAD
   spriteMode: 1
+=======
+  spriteMode: 2
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +71,81 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+<<<<<<< HEAD
     sprites: []
+=======
+    sprites:
+    - name: Sheet-Intro-Background_0
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 2579
+        width: 1530
+        height: 2534
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Intro-Background_1
+      rect:
+        serializedVersion: 2
+        x: 2934
+        y: 1165
+        width: 702
+        height: 1050
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Intro-Background_2
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 286
+        width: 1498
+        height: 840
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Intro-Background_3
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 354
+        width: 510
+        height: 431
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Intro-Background_4
+      rect:
+        serializedVersion: 2
+        x: 3654
+        y: 3268
+        width: 505
+        height: 267
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Intro-Background_5
+      rect:
+        serializedVersion: 2
+        x: 5234
+        y: 3563
+        width: 473
+        height: 278
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sheet-Intro-Background_6
+      rect:
+        serializedVersion: 2
+        x: 6874
+        y: 3574
+        width: 260
+        height: 164
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+>>>>>>> 9785874a477942a29878154d75ba30ee4ef032e4
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -45,4 +45,9 @@ public class SharkChompAudio : MonoBehaviour {
 	{
 		boat.GetComponent<boat> ().throwMine ();
 	}
+
+	public void shootHarpoon()
+	{
+		boat.GetComponent<boat> ().shootHarpoon ();
+	}
 }

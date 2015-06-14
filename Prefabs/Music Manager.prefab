@@ -101,14 +101,14 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 51.5999985
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -170,14 +170,14 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 42.3499985
+  MaxDistance: 517.22998
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -210,7 +210,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: .269444436
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -273,9 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb8e395c305cb34db7b5860624d34c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  track1: {fileID: 8300000, guid: 9e5fef1c36c463e4f93dc0ae986b62d5, type: 3}
-  track2: {fileID: 8300000, guid: ac306d60f0912ca4bb0a50de50b4b1b2, type: 3}
-  track3: {fileID: 8300000, guid: 3d228f7a8459d894ebc3be4ed3ef5270, type: 3}
+  track1: {fileID: 8300000, guid: d0039df13ada79f4e85235a983bf3902, type: 3}
+  track2: {fileID: 8300000, guid: d0039df13ada79f4e85235a983bf3902, type: 3}
+  track3: {fileID: 8300000, guid: d0039df13ada79f4e85235a983bf3902, type: 3}
   source1: {fileID: 8200000}
   source2: {fileID: 8200002}
   swap: 0
