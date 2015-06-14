@@ -71,6 +71,8 @@ public class boat : MonoBehaviour {
 
 	public int damage = 0;
 
+	public int health = 100;
+
 	void Awake(){
 		audio = GetComponent<AudioSource>();
 	}
@@ -100,6 +102,9 @@ public class boat : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if (health <= 0)
+			Destroy (gameObject);
 
 		if(gotHit)
 		{
@@ -177,6 +182,7 @@ public class boat : MonoBehaviour {
 	IEnumerator handleDamage(){
 		gotHit = true;
 		damage++;
+		health = health - 10;
 		audio.clip = track3;
 		audio.Play();
 		GetComponent<BoxCollider2D> ().enabled = false;

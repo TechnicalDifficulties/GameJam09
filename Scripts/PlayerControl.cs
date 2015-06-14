@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿	using UnityEngine;
 using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+
+	public GameObject MusicManager;
+
 	[HideInInspector]
 	public bool facingRight = true;			// For determining which way the player is currently facing.
 	[HideInInspector]
@@ -22,7 +25,7 @@ public class PlayerControl : MonoBehaviour
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
-	private Animator anim;					// Reference to the player's animator component.
+	public Animator anim;					// Reference to the player's animator component.
 	public GameObject sprite;
 
 	public GameObject dCharge;
@@ -43,6 +46,7 @@ public class PlayerControl : MonoBehaviour
 	public bool flickering = false;
 
 	public int damage = 0;
+	public int health = 100;
 
 	AudioSource audio;
 	void Awake()
@@ -79,6 +83,16 @@ public class PlayerControl : MonoBehaviour
 
 	void Update()
 	{
+		if (health > 100)
+			health = 100;
+
+		if (health <= 0) {
+			Destroy (gameObject);
+			//spawn dead shark
+			MusicManager.GetComponent<musicManagerScript>().source1.GetComponent<audioSourceScript>().targetPitch = 0f;
+			MusicManager.GetComponent<musicManagerScript>().source2.GetComponent<audioSourceScript>().targetPitch = 0f;
+		}
+
 		if(gotHit)
 		{
 			if(!flickering){
@@ -260,9 +274,9 @@ public class PlayerControl : MonoBehaviour
 			else
 				Flip();
 		}
-		float zTarget =  Mathf.Rad2Deg * Mathf.Atan((GetComponent<Rigidbody2D> ().velocity.y)/(GetComponent<Rigidbody2D> ().velocity.x));
-		rot = Mathf.Round((transform.rotation.z + zTarget) / 3);
-		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
+//		float zTarget =  Mathf.Rad2Deg * Mathf.Atan((GetComponent<Rigidbody2D> ().velocity.y)/(GetComponent<Rigidbody2D> ().velocity.x));
+//		rot = Mathf.Round((transform.rotation.z + zTarget) / 3);
+//		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y,rot));                                    
 
 
 		if (transform.position.y > 4.3f) {
@@ -276,8 +290,8 @@ public class PlayerControl : MonoBehaviour
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
 		}
 
-		if (transform.position.x > 25f) {
-			transform.position = new Vector3 (25f,transform.position.y, transform.position.z);
+		if (transform.position.x > 34f) {
+			transform.position = new Vector3 (34f,transform.position.y, transform.position.z);
 			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
 		}
 
@@ -307,6 +321,7 @@ public class PlayerControl : MonoBehaviour
 	IEnumerator handleDamage(){
 		gotHit = true;
 		damage++;
+		health = health - 20;
 		audio.clip = hurt;
 		audio.Play ();
 		GetComponent<CircleCollider2D> ().enabled = false;
@@ -315,6 +330,14 @@ public class PlayerControl : MonoBehaviour
 
 		gotHit = false;
 
+	}
+
+	public void ateFish()
+	{
+		Debug.Log ("You ate a fish!");
+		health++;
+		audio.clip = chop2;
+		audio.Play ();
 	}
 	
 	void OnCollisionEnter2D(Collision2D col)

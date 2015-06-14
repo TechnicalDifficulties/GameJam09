@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
+  - 114: {fileID: 11418290}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11400000
+--- !u!114 &11418290
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6182873a51adc3f4487c9597ad46d897, type: 3}
+  m_Script: {fileID: 11500000, guid: 119b36fa431d9314d867e3ad9fc76663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   musicManager: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   repeat1: 0
   repeat2: 0
   repeat3: 0
+  fish: {fileID: 0}
   mMscript: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -23,7 +23,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 1.33333337
+      - time: .833333313
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -40,9 +40,9 @@ AnimationClip:
       value: {fileID: 21300016, guid: e40e1fa038c72de4facb0ff40f0cd7a5, type: 3}
     - time: .166666672
       value: {fileID: 21300018, guid: e40e1fa038c72de4facb0ff40f0cd7a5, type: 3}
-    - time: .833333313
+    - time: .5
       value: {fileID: 21300016, guid: e40e1fa038c72de4facb0ff40f0cd7a5, type: 3}
-    - time: 1.33333337
+    - time: .833333313
       value: {fileID: 21300016, guid: e40e1fa038c72de4facb0ff40f0cd7a5, type: 3}
     attribute: m_Sprite
     path: 
@@ -75,7 +75,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 1.41666675
+    m_StopTime: .916666627
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -98,7 +98,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 1.33333337
+      - time: .833333313
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -114,7 +114,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: .833333313
+  - time: .5
     functionName: playChomp1
     data: 
     objectReferenceParameter: {fileID: 0}
