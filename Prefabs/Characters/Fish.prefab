@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11407350}
   - 50: {fileID: 5073094}
   - 61: {fileID: 6158590}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Fish
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 476820}
   - 212: {fileID: 21203788}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sheet-Fish1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

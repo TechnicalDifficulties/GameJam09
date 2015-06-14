@@ -97,7 +97,7 @@ public class Charge : MonoBehaviour
 
 	IEnumerator MyCoroutine()
 	{
-		yield return new WaitForSeconds (.7f);
+		yield return new WaitForSeconds (.65f);
 		if (!spat) {
 			GetComponent<Rigidbody2D> ().gravityScale = Random.Range (.1f, .3f);
 			AudioSource audio = GetComponent<AudioSource> ();

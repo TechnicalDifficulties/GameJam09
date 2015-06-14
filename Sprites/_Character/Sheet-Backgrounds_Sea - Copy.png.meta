@@ -1,7 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: e3da0de37b865514796904209d0dd02b
-timeCreated: 1434247362
+timeCreated: 1434274452
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,13 +11,6 @@ TextureImporter:
     21300008: Sheet-Backgrounds_Sea - Copy_4
     21300010: Sheet-Backgrounds_Sea - Copy_5
     21300012: Sheet-Backgrounds_Sea - Copy_6
-=======
-guid: 325dedd0c7215c34e84debb09381a771
-timeCreated: 1434251931
-licenseType: Free
-TextureImporter:
-  fileIDToRecycleName: {}
->>>>>>> 5adc8a26fb29cc5d20a586af578239164e0fe763
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -45,22 +37,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-<<<<<<< HEAD
     aniso: 16
-=======
-    aniso: -1
->>>>>>> 5adc8a26fb29cc5d20a586af578239164e0fe763
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-<<<<<<< HEAD
   spriteMode: 2
-=======
-  spriteMode: 1
->>>>>>> 5adc8a26fb29cc5d20a586af578239164e0fe763
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -71,7 +55,6 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-<<<<<<< HEAD
     sprites:
     - name: Sheet-Backgrounds_Sea - Copy_0
       rect:
@@ -109,7 +92,7 @@ TextureImporter:
         x: 1494
         y: 5807
         width: 2062
-        height: 338
+        height: 344
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,15 +120,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 226
-        width: 11614
-        height: 2142
+        y: 145
+        width: 11226
+        height: 2223
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-=======
-    sprites: []
->>>>>>> 5adc8a26fb29cc5d20a586af578239164e0fe763
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -40,8 +40,9 @@ public class gameManagerScript : MonoBehaviour {
 	{
 		while(true)
 		{
-			summonSchool();
+
 			yield return new WaitForSeconds(30);
+			summonSchool();
 		}
 	}
 

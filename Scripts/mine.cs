@@ -35,7 +35,7 @@ public class mine : MonoBehaviour {
 
 	IEnumerator MyCoroutine()
 	{
-		yield return new WaitForSeconds (.7f);
+		yield return new WaitForSeconds (.65f);
 		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .5f);
 		AudioSource audio = GetComponent<AudioSource> ();
 		audio.Play ();
