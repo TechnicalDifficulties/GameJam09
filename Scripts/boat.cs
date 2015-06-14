@@ -57,6 +57,12 @@ public class boat : MonoBehaviour {
 
 	public bool flickering = false;
 
+	public AudioClip track1;
+	public AudioClip track2;
+	public AudioClip track3;
+
+	public AudioSource audio;
+
 	public Vector3 baseLocalPosition1;
 	public Vector3 baseLocalPosition2;
 	public Vector3 baseLocalPosition3;
@@ -64,6 +70,10 @@ public class boat : MonoBehaviour {
 	public Vector3 baseLocalPosition5;
 
 	public int damage = 0;
+
+	void Awake(){
+		audio = GetComponent<AudioSource>();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -167,6 +177,8 @@ public class boat : MonoBehaviour {
 	IEnumerator handleDamage(){
 		gotHit = true;
 		damage++;
+		audio.clip = track3;
+		audio.Play();
 		GetComponent<BoxCollider2D> ().enabled = false;
 		yield return new WaitForSeconds(3);
 		GetComponent<BoxCollider2D> ().enabled = true;
@@ -356,7 +368,7 @@ public class boat : MonoBehaviour {
 					torpedoInstance5.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * -1.5f * 1000f);
 			}
 			launched = true;
-			AudioSource audio = GetComponent<AudioSource>();
+			audio.clip = track1;
 			audio.Play();
 			
 		}
