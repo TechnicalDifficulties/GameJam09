@@ -31,6 +31,8 @@ public class mine : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (.5f);
 		GetComponent<Rigidbody2D> ().gravityScale = Random.Range(.1f, .5f);
+		AudioSource audio = GetComponent<AudioSource> ();
+		audio.Play ();
 	}
 
 	IEnumerator MyCoroutine2()
@@ -38,6 +40,7 @@ public class mine : MonoBehaviour {
 		yield return new WaitForSeconds (sinkTime);
 		GetComponent<Rigidbody2D> ().gravityScale = 0;
 		GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+
 	}
 
 	void OnTriggerEnter2D (Collider2D col) 

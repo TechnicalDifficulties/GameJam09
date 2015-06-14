@@ -983,14 +983,10 @@ Prefab:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
-    - target: {fileID: 21295658, guid: d2c73a639fbc5b645a4d1eeaf09a9cad, type: 2}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 21237164, guid: d2c73a639fbc5b645a4d1eeaf09a9cad, type: 2}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
+    - target: {fileID: 11456076, guid: d2c73a639fbc5b645a4d1eeaf09a9cad, type: 2}
+      propertyPath: track3
+      value: 
+      objectReference: {fileID: 8300000, guid: 112b7cca023773041973085e59a64ce9, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2c73a639fbc5b645a4d1eeaf09a9cad, type: 2}
   m_IsPrefabParent: 0
@@ -1100,44 +1096,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5045220, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_AngularDrag
-      value: .150000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 11423414, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: spit
-      value: 
-      objectReference: {fileID: 8300000, guid: b6bdfa46b012c004e82642979566fdac, type: 3}
-    - target: {fileID: 21283230, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21283230, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21283230, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5810160, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8220122, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8220122, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
       propertyPath: m_Volume
-      value: .200000003
+      value: .75
       objectReference: {fileID: 0}
-    - target: {fileID: 8252458, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
-      propertyPath: m_Volume
-      value: .200000003
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 21281780, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1176f4d1b538c2f4da2d8c00dbb38c7e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &837959586

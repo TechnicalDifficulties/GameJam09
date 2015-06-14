@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
 	public AudioClip chop1;
 	public AudioClip chop2;
 	public AudioClip spit;
+	public AudioClip hurt;
 
 	public bool exploded = false;
 
@@ -306,6 +307,8 @@ public class PlayerControl : MonoBehaviour
 	IEnumerator handleDamage(){
 		gotHit = true;
 		damage++;
+		audio.clip = hurt;
+		audio.Play ();
 		GetComponent<CircleCollider2D> ().enabled = false;
 		yield return new WaitForSeconds(3);
 		GetComponent<CircleCollider2D> ().enabled = true;
