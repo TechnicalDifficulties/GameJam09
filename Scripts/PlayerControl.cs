@@ -6,6 +6,8 @@ public class PlayerControl : MonoBehaviour
 	public GameObject GameManager;
 	public GameObject MusicManager;
 
+	public GameObject deathScreen;
+
 	[HideInInspector]
 	public bool facingRight = true;			// For determining which way the player is currently facing.
 	[HideInInspector]
@@ -123,6 +125,9 @@ public class PlayerControl : MonoBehaviour
 
 			GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 			GetComponent<Rigidbody2D>().isKinematic = true;
+
+			StartCoroutine(handleDeath());
+
 		}
 		if (!dead) {
 			if (gotHit) {
@@ -254,6 +259,10 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 
+	}
+	IEnumerator handleDeath(){
+		yield return new WaitForSeconds (5);
+		deathScreen.gameObject.SetActive(true);
 	}
 
 	IEnumerator MyCoroutine2()
@@ -393,14 +402,14 @@ public class PlayerControl : MonoBehaviour
 
 			if (col.tag == "CaveTrigger") {
 				//Debug.Log("Goto Tutorial 2");
-				Application.LoadLevel(2);
+				Application.LoadLevel(3);
 			}
 
 			if (col.tag == "CaveTrigger2") {
 				//Debug.Log("Boss Fight");
 				MusicManager.GetComponent<musicManagerScript>().playBossMusic();
 				GameManager.GetComponent<gameManagerScript>().tutorial = false;
-				Application.LoadLevel(3);
+				Application.LoadLevel(4);
 			}
 		}
 	}
@@ -443,7 +452,16 @@ public class PlayerControl : MonoBehaviour
 				health += 100;
 			audio.clip = squeek;
 			audio.Play ();
+			
+			StartCoroutine(winGame());
 		}
+	}
+
+	IEnumerator winGame()
+	{
+		yield return new WaitForSeconds (1.5f);
+		MusicManager.GetComponent<musicManagerScript> ().playVictoryMusic ();
+		Application.LoadLevel(5);
 	}
 
 	public void ateFish()

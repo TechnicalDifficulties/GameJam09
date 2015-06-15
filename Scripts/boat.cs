@@ -315,12 +315,14 @@ public class boat : MonoBehaviour {
 	}
 	IEnumerator throwXMines(int x)
 	{
-		for (int i = 0; i < x; i ++) {
-			duckanim.SetTrigger ("ThrowMine");
-			yield return new WaitForSeconds (2f);
+		if (!dead) {
+			for (int i = 0; i < x; i ++) {
+				duckanim.SetTrigger ("ThrowMine");
+				yield return new WaitForSeconds (2f);
 
+			}
+			ready = true;
 		}
-		ready = true;
 	}
 
 	public void shootHarpoon()

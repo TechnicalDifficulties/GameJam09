@@ -57,6 +57,17 @@ public class musicManagerScript : MonoBehaviour {
 		source1.Play ();
 		source1.loop = true;
 	}
+	public void playVictoryMusic(){
+		source1.clip = track3;
+		source1.Play ();
+		source1.loop = true;
+	}
+
+	public void playIntroMusic(){
+		source1.clip = track1;
+		source1.Play ();
+		source1.loop = true;
+	}
 
 	public void changeTrack(AudioClip clip){
 		if (swap){
